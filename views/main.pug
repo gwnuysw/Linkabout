@@ -1,0 +1,26 @@
+doctype Html
+html
+head
+  title Inbetter
+  link(rel="stylesheet" href="/stylesheets/main.css")
+  link(rel="stylesheet" href="/stylesheets/MyProfile.css")
+  body
+    header
+      ul
+        li
+          a(class="active" href="/auth/loginform") SignIn
+        li
+          a(class="active" href="/logout") logout
+        li
+          a(class="active" href="/MyProfile") MyPage
+        li
+          a(class="active" href="/") home
+        li
+          a(href="#news") News
+        li
+          a(href="#Contact") Contact
+        li
+          a(href="#about") About
+      h1(class="title") InBetter
+
+    block MainCategory
