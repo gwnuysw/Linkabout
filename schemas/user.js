@@ -8,7 +8,16 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  pw: {
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  nick:{
+    type: String,
+    required: true,
+  },
+  provider: {
     type: String,
     required: true,
   },
@@ -18,4 +27,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('user', userSchema);
