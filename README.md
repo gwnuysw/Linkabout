@@ -17,20 +17,19 @@ InBetter's goal is to make both people who use Inbetter and people who are devel
 ### complete
 
 - 프로젝트 생성 Create project
+- 메인 페이지 생성 Create main page
+- 로그인, 로그아웃 구현 Sign in, log out implementation
 
 ### Proceeding
 
-- 메인 페이지 생성 Create main page
+- 게시 링크 항목화 link categorization
 
 ### 개발 예정
 
-- 로그인, 로그아웃 구현 Sign in, log out implementation
 - 개인 프로필 페이지 Personal Profile Page
-- 게시 링크 항목화 link categorization
 - 링크 업로드 link upload
 - 댓글 comment
-- 게시 링크에 해당하는 질문, 답변 기능
-Question and answer function
+- 게시 링크에 해당하는 질문, 답변 기능 Question and answer function
 - 팔로우 follow
 
 ## License

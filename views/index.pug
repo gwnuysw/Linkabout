@@ -1,5 +1,23 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype Html
+html
+head
+  title Inbetter
+  link(rel="stylesheet" href="/stylesheets/main.css")
+  body
+    header
+      ul
+        if isAuthed
+          li
+            a(class="active" href="/auth/logout") logout
+          li
+            a(class="active" href="/MyProfile") MyPage
+        else
+          li
+            a(class="active" href="/auth/loginpage") SignIn
+        li
+          a(class="active" href="#news") News
+        li
+          a(class="active" href="#about") About
+      a(href="/" )
+        h1(class="title" style="color: black;") InBetter
+    block MainView

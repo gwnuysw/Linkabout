@@ -1,24 +1,22 @@
 const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
-
-const userSchema = new Schema({
-  id: {
+const {Types: {ObjectId}} = Schema;
+const setSchema = new Schema({
+  title: {
     type: String,
     required: true,
-    unique: true,
   },
-  email: {
+  createdBy: {
     type: String,
     required: true,
-    unique: true,
   },
-  nick:{
-    type: String,
+  ancestor:{
+    type: ObjectId,
     required: true,
-    unique: true,
+    ref: 'set',
   },
-  provider: {
+  views: {
     type: String,
     required: true,
   },
@@ -28,4 +26,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('set', setSchema);
