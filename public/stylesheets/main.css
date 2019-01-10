@@ -1,33 +1,50 @@
 a {
   text-decoration: none;
+  color: black;
 }
-ul {
+.horizen-menu-right {
     list-style: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
 }
-
-li {
+.horizen-menu-right li {
     float: right;
 }
-
-li a {
+.horizen-menu-right li a {
     display: block;
     color: black;
     text-align: center;
     padding: 14px 16px;
 }
-
-li a:hover {
+.horizen-menu-right li a:hover {
     background-color: #111;
     color : white;
 }
-body {
-    font-family: "Lato", sans-serif;
+.horizen-menu-left {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+.horizen-menu-left li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+.horizen-menu-left li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+}
+.horizen-menu-left li a:hover {
+    background-color: white;
+    color : black;
 }
 .title{
   text-align: center;
+}
+body {
+    font-family: "Lato", sans-serif;
 }
 section {
     display: -webkit-flex;

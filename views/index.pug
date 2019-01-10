@@ -5,19 +5,32 @@ head
   link(rel="stylesheet" href="/stylesheets/main.css")
   body
     header
-      ul
+      ul(class="horizen-menu-right")
         if isAuthed
           li
-            a(class="active" href="/auth/logout") logout
+            a(href="/auth/logout") logout
           li
-            a(class="active" href="/MyProfile") MyPage
+            a(href="/MyProfile") MyPage
         else
           li
-            a(class="active" href="/auth/loginpage") SignIn
+            a(href="/auth/loginpage") SignIn
         li
-          a(class="active" href="#news") News
+          a(href="#news") News
         li
-          a(class="active" href="#about") About
+          a(href="#about") About
       a(href="/" )
-        h1(class="title" style="color: black;") InBetter
+        h1(class="title")= title
+    ul(class="horizen-menu-left")
+      li
+        a(href="#") Sets
+      li
+        a(href="#") Liks
+      li
+        a(href="#") Communities
+      li
+        a(href="/set/newsetform/"+currentSet) New Set
+      li
+        a(href="#") New link
+      li
+        a(href="#") New Community
     block MainView
