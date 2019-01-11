@@ -11,7 +11,7 @@ LinkAbout is an attempt to broaden this to other areas.
 
 LinkAbout를 이용하는 사람들과 개발하는 사람 모두 더 좋은 취미 생활을 하도록 하는 것이 LinkAbout의 목표 입니다.
 
-LinkAbout's goal is to make both people who use LinkAbout and people who are developing better.
+LinkAbout's goal is to make both those who use LinkAbout and those who develop it better hobbies.
 
 ## Development progress
 

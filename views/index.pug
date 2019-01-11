@@ -1,7 +1,7 @@
 doctype Html
 html
 head
-  title Inbetter
+  title LinkAbout
   link(rel="stylesheet" href="/stylesheets/main.css")
   body
     header
@@ -18,17 +18,28 @@ head
           a(href="#news") News
         li
           a(href="#about") About
-      a(href="/" )
-        h1(class="title")= title
+      if cursettitle == "LinkAbout"
+        a(href="/")
+          h1(class="title")= cursettitle
+      else
+        a(href="/subset/"+cursetid+"/"+cursettitle)
+          h1(class="title")= cursettitle
     ul(class="horizen-menu-left")
-      li
-        a(href="#") Sets
+      if uppersettitle == "LinkAbout"
+        li
+          a(href="/") Upper set
+      else if uppersettitle === undefined
+        li
+          a(href="/") Upper set
+      else
+        li
+          a(href="/subset/"+uppersetid+"/"+uppersettitle) Upper Set
       li
         a(href="#") Liks
       li
         a(href="#") Communities
       li
-        a(href="/set/newsetform/") New Set
+        a(href="/set/newsetform/"+cursetid+"/"+cursettitle) New Set
       li
         a(href="#") New link
       li

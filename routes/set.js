@@ -5,51 +5,52 @@ let router = express.Router();
 let set = require('../schemas/set');
 let user = require('../schemas/user');
 
+router.get('/newsetform/:setid/:settitle', isLoggedIn, function (req, res, next) {
+  let puginform;
+  let ancestor;
 
-let currentSet = '5c358828c7f4dc540bcda0df';
-
-router.get('/newsetform/:cursetid/:cursettitle', isLoggedIn, function (req, res, next) {
-  console.log('currentset???', req.params.cursetid, req.params.cursettitle);
-  set.find({_id: currentSet})
-  .then((sets)=>{
-    let puginform = {
-      isAuthed: req.isAuthenticated(),
-      set: sets[0].title,
-    };
-    res.render('newsetform',puginform);
-  })
-  .catch((err)=>{
-    console.log(err);
-    next(err);
-  });
-});
-
-router.get('/subset/:setid/:settitle', function (req, res, next) {
-  console.log('set id is ', req.params.setid, req.params.settitle);
-  set.find({ancestor: req.params.setID})
-  .then((sets)=>{
-    let puginform = {
+  Promise.all([
+    set.find({ancestor: req.params.setid}),
+    set.find({_id: req.params.setid})
+  ])
+  .then(([children, curset]) => {
+    puginform = {
       isAuthed : req.isAuthenticated(),
-      sets : sets,
-      title : req.params.setTITLE,
+      children : children,
       cursetid : req.params.setid,
       cursettitle : req.params.settitle,
     }
-    res.render('set', puginform);
+    ancestor = curset[0].ancestor;
+  })
+  .then(()=>{
+    if( ancestor === undefined ){
+      res.render('newsetform', puginform);
+    }
+    else{
+      set.find({_id: ancestor})
+      .then((upperset)=>{
+        puginform.uppersetid = upperset[0]._id;
+        puginform.uppersettitle = upperset[0].title;
+        console.log('upper',puginform.uppersetid,puginform.uppersettitle);
+        res.render('newsetform', puginform);
+      })
+      .catch(()=>{
+      });
+    }
   });
 });
 
-router.post('/newset', isLoggedIn, function (req, res, next) {
+router.post('/newset/:setid/:settitle', isLoggedIn, function (req, res, next) {
   let newset = new set({
     title : req.body.title,
     createdBy : req.user.nick,
-    ancestor : currentSet,
+    ancestor : req.params.setid,
     views : 0,
   });
   newset.save()
   .then((result)=>{
     console.log(result);
-    res.redirect('/');
+    res.redirect('/subset/'+req.params.setid+'/'+req.params.settitle);
   })
   .catch((err)=>{
     console.error(err);

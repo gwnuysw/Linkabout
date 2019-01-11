@@ -1,9 +1,9 @@
 extends index
 block MainView
   ul
-    if sets.length == 0
-      li set이 없습니다. 첫 set을 만들어 주세요!
-    each set in sets
+    if children.length == 0
+      li child이 없습니다. 첫 child을 만들어 주세요!
+    each child in children
       li
-        a(href="/set/subset/"+set._id+"/"+set.title)
-          h2= set.title
+        a(href="/subset/"+child._id+"/"+child.title)
+          h2= child.title
