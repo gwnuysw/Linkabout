@@ -6,10 +6,12 @@ const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
 const auth = require('./routes/auth');
 const set = require('./routes/set');
+const link = require('./routes/link');
+
 const passportConfig = require('./passport');
 
 require('dotenv').config();
@@ -42,10 +44,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', index);
+app.use('/users', users);
 app.use('/auth', auth);
 app.use('/set', set);
+app.use('/link',link);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

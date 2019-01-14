@@ -24,24 +24,4 @@ head
       else
         a(href="/subset/"+cursetid+"/"+cursettitle)
           h1(class="title")= cursettitle
-    ul(class="horizen-menu-left")
-      if uppersettitle == "LinkAbout"
-        li
-          a(href="/") Upper set
-      else if uppersettitle === undefined
-        li
-          a(href="/") Upper set
-      else
-        li
-          a(href="/subset/"+uppersetid+"/"+uppersettitle) Upper Set
-      li
-        a(href="#") Liks
-      li
-        a(href="#") Communities
-      li
-        a(href="/set/newsetform/"+cursetid+"/"+cursettitle) New Set
-      li
-        a(href="#") New link
-      li
-        a(href="#") New Community
     block MainView

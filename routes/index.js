@@ -4,7 +4,6 @@ let set = require('../schemas/set');
 let rootSet = '5c358828c7f4dc540bcda0df';
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  //console.log('set id is ', req.params.setid, req.params.settitle);
   set.find({ancestor: rootSet})
   .then((children)=>{
     let puginform = {
@@ -16,20 +15,20 @@ router.get('/', function (req, res, next) {
     res.render('set',puginform);
   })
 });
-router.get('/subset/:setid/:settitle', function (req, res, next) {
+router.get('/subset/:cursetid/:cursettitle', function (req, res, next) {
   let puginform;
   let ancestor;
 
   Promise.all([
-    set.find({ancestor: req.params.setid}),
-    set.find({_id: req.params.setid})
+    set.find({ancestor: req.params.cursetid}),
+    set.find({_id: req.params.cursetid})
   ])
   .then(([children, curset]) => {
     puginform = {
       isAuthed : req.isAuthenticated(),
       children : children,
-      cursetid : req.params.setid,
-      cursettitle : req.params.settitle,
+      cursetid : req.params.cursetid,
+      cursettitle : req.params.cursettitle,
     }
     ancestor = curset[0].ancestor;
   })
@@ -49,6 +48,5 @@ router.get('/subset/:setid/:settitle', function (req, res, next) {
       });
     }
   });
-
 });
 module.exports = router;
