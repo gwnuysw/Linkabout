@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
 const {Types: {ObjectId}} = Schema;
-const setSchema = new Schema({
+const communitySchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -11,17 +11,24 @@ const setSchema = new Schema({
     type: String,
     required: true,
   },
-  ancestor:{
+  belong:{
     type: ObjectId,
     required: true,
-    ref: 'set',
-  },
-  ancestortitle:{
-    type: String,
-    required: true,
-    ref: 'set',
+    ref: 'sets',
   },
   views: {
+    type: String,
+    required: true,
+  },
+  text:{
+    type: String,
+    required: true,
+  },
+  author:{
+    type: String,
+    required: true,
+  },
+  link:{
     type: String,
     required: true,
   },
@@ -31,4 +38,4 @@ const setSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('set', setSchema);
+module.exports = mongoose.model('community', communitySchema);

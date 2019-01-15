@@ -22,10 +22,12 @@ block MainView
       a(href="/link/newlinkform/"+cursetid+"/"+cursettitle) New link
     li
       a(href="#") New Community
-  ul(class="content")
-    if links.length == 0
-      li link가 없습니다. 첫 link를 만들어 주세요!
-    each link in links
-      li
-        a(href="/link/content/"+cursetid+"/"+cursettitle+"/"+link._id)
-          h2= link.title
+
+  div(class="content" style="border-bottom:5px solid; border-left:1px groove; border-right:1px groove; padding:10px;")
+    h3= content.title
+    a(href=content.link style="color:blue;")= content.link
+    p(style="color: gray;") Orignal author : #{content.author}
+    div(style=" border-top: 1px dashed;")
+      p(style="margin-bottom: 0px;")= content.createdBy
+      p(style="font-size: 0.7em; margin-top: 1px;") 게시일 : #{content.createAt}
+      p(style="font-size: 0.8em")= content.text

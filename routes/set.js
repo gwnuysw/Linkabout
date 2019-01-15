@@ -5,6 +5,26 @@ let router = express.Router();
 let set = require('../schemas/set');
 let user = require('../schemas/user');
 
+router.get('/:cursetid/:cursettitle', function (req, res, next) {
+  let puginform;
+
+  Promise.all([
+      set.find({ancestor: req.params.cursetid}),
+      set.find({_id: req.params.cursetid})
+  ])
+  .then(([children, curset]) => {
+    puginform = {
+      isAuthed : req.isAuthenticated(),
+      children : children,
+      cursetid : req.params.cursetid,
+      cursettitle : req.params.cursettitle,
+      uppersetid : curset[0].ancestor,
+      uppersettitle : curset[0].ancestortitle,
+    }
+    res.render('set',puginform);
+  });
+});
+
 router.get('/newsetform/:cursetid/:cursettitle', isLoggedIn, function (req, res, next) {
   let puginform;
 
@@ -24,6 +44,7 @@ router.post('/newset/:cursetid/:cursettitle', isLoggedIn, function (req, res, ne
     title : req.body.title,
     createdBy : req.user.nick,
     ancestor : req.params.cursetid,
+    ancestortitle : req.params.cursettitle,
     views : 0,
   });
   newset.save()

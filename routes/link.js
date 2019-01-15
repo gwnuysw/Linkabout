@@ -6,18 +6,40 @@ let set = require('../schemas/set');
 let user = require('../schemas/user');
 let link = require('../schemas/link');
 
+router.get('/content/:cursetid/:cursettitle/:linkid',function(req,res,next){
+  let puginform;
+  link.find({_id:req.params.linkid})
+  .then((content)=>{
+    puginform = {
+      isAuthed: req.isAuthenticated(),
+      cursetid: req.params.cursetid,
+      cursettitle: req.params.cursettitle,
+      content: content[0],
+    }
+    console.log(content[0]);
+    res.render('linkcontent',puginform);
+  });
+
+});
 router.get('/:cursetid/:cursettitle', function (req, res, next){
   let puginform;
 
-  link.find({belong : req.params.cursetid})
-  .then((links)=>{
+  Promise.all([
+    link.find({belong : req.params.cursetid}),
+    set.find({_id: req.params.cursetid})
+  ])
+  .then(([links, curset])=>{
     puginform = {
       isAuthed : req.isAuthenticated(),
       cursetid : req.params.cursetid,
       cursettitle : req.params.cursettitle,
       links : links,
+      uppersetid: curset[0].ancestor,
+      uppersettitle: curset[0].ancestortitle,
     }
     res.render('linklist', puginform);
+  })
+  .catch(()=>{
   });
 });
 router.get('/newlinkform/:cursetid/:cursettitle', isLoggedIn, function (req, res, next) {
