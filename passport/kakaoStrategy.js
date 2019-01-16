@@ -21,6 +21,17 @@ module.exports = (passport) => {
           id: profile.id,
           provider: 'kakao',
         });
+        let newpersonalset = new set({
+          title : req.user.nick,
+          ancestor : '5c358828c7f4dc540bcda0df',
+          ancestortitle : 'LinkAbout',
+          createdby : profile.displayName,
+          personal : profile.id,
+        });
+        newpersonalset.save()
+        .then((result)=>{
+          res.redirect('/');
+        })
         done(null, newUser);
       }
     }

@@ -1,0 +1,21 @@
+doctype Html
+html
+head
+  title LinkAbout
+  link(rel="stylesheet" href="/stylesheets/main.css")
+  body
+    header
+      ul(class="horizen-menu-right")
+        if isAuthed
+          li
+            a(href="/auth/logout") logout
+          li
+            a(href="/MyProfile") MyPage
+        else
+          li
+            a(href="/auth/loginpage") SignIn
+        li
+          a(href="#news") News
+        a(href="/set/"+cursetid+"/"+cursettitle)
+          h1(class="title")= cursettitle
+    block MainView

@@ -1,0 +1,23 @@
+extends header
+
+block MainView
+  ul(class="horizen-menu-left")
+    if uppersettitle === undefined
+    else
+      li
+        a(href="/set/"+uppersetid+"/"+uppersettitle) #{uppersettitle}
+    li
+      a(href="/link/document/"+cursetid+"/"+cursettitle) #{cursettitle} Document Links
+    li
+      a(href="/link/community/"+cursetid+"/"+cursettitle) #{cursettitle} Community link
+    li
+      a(href="/set/newsetform/"+cursetid+"/"+cursettitle) New Set
+    li
+      a(href="/link/newlinkform/"+cursetid+"/"+cursettitle) New Link
+  ul(class="content")
+    if children.length == 0
+      li child이 없습니다. 첫 child을 만들어 주세요!
+    each child in children
+      li
+        a(href="/set/"+child._id+"/"+child.title)
+          h2= child.title

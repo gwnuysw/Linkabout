@@ -17,15 +17,15 @@ router.get('/content/:cursetid/:cursettitle/:linkid',function(req,res,next){
       content: content[0],
     }
     console.log(content[0]);
-    res.render('linkcontent',puginform);
+    res.render('public/linkcontent',puginform);
   });
 
 });
-router.get('/:cursetid/:cursettitle', function (req, res, next){
+router.get('/community/:cursetid/:cursettitle', function (req, res, next){
   let puginform;
 
   Promise.all([
-    link.find({belong : req.params.cursetid}),
+    link.find({belong : req.params.cursetid, linktype : 'community'}),
     set.find({_id: req.params.cursetid})
   ])
   .then(([links, curset])=>{
@@ -37,7 +37,28 @@ router.get('/:cursetid/:cursettitle', function (req, res, next){
       uppersetid: curset[0].ancestor,
       uppersettitle: curset[0].ancestortitle,
     }
-    res.render('linklist', puginform);
+    res.render('public/linklist', puginform);
+  })
+  .catch(()=>{
+  });
+});
+router.get('/document/:cursetid/:cursettitle', function (req, res, next){
+  let puginform;
+
+  Promise.all([
+    link.find({belong : req.params.cursetid, linktype : 'document'}),
+    set.find({_id: req.params.cursetid})
+  ])
+  .then(([links, curset])=>{
+    puginform = {
+      isAuthed : req.isAuthenticated(),
+      cursetid : req.params.cursetid,
+      cursettitle : req.params.cursettitle,
+      links : links,
+      uppersetid: curset[0].ancestor,
+      uppersettitle: curset[0].ancestortitle,
+    }
+    res.render('public/linklist', puginform);
   })
   .catch(()=>{
   });
@@ -52,7 +73,7 @@ router.get('/newlinkform/:cursetid/:cursettitle', isLoggedIn, function (req, res
       cursetid : req.params.cursetid,
       cursettitle : req.params.cursettitle,
     }
-    res.render('newlinkform', puginform);
+    res.render('public/newlinkform', puginform);
   });
 });
 
@@ -64,12 +85,13 @@ router.post('/newlink/:cursetid/:cursettitle', isLoggedIn, function (req, res, n
     text : req.body.text,
     author : req.body.author,
     link : req.body.link,
+    linktype : req.body.linktype,
     views : 0,
   });
   newlink.save()
   .then((result)=>{
     console.log(result);
-    res.redirect('/link/'+req.params.cursetid+'/'+req.params.cursettitle);
+    res.redirect('/link/document/'+req.params.cursetid+'/'+req.params.cursettitle);
   })
   .catch((err)=>{
     console.error(err);

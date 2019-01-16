@@ -14,7 +14,7 @@ const linkSchema = new Schema({
   belong:{
     type: ObjectId,
     required: true,
-    ref: 'sets',
+    ref: 'set',
   },
   views: {
     type: String,
@@ -29,6 +29,10 @@ const linkSchema = new Schema({
     required: true,
   },
   link:{
+    type: String,
+    required: true,
+  },
+  linktype:{
     type: String,
     required: true,
   },

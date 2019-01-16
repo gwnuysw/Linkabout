@@ -9,7 +9,7 @@ router.get('/:cursetid/:cursettitle', function (req, res, next) {
   let puginform;
 
   Promise.all([
-      set.find({ancestor: req.params.cursetid, personal: null}),
+      set.find({ancestor: req.params.cursetid, personal:}),
       set.find({_id: req.params.cursetid})
   ])
   .then(([children, curset]) => {
@@ -53,6 +53,7 @@ router.post('/newset/:cursetid/:cursettitle', isLoggedIn, function (req, res, ne
     createdBy : req.user.nick,
     ancestor : req.params.cursetid,
     ancestortitle : req.params.cursettitle,
+    personal : req.user._id,
     views : 0,
   });
   newset.save()

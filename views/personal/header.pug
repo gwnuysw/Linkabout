@@ -16,10 +16,6 @@ head
             a(href="/auth/loginpage") SignIn
         li
           a(href="#news") News
-      if cursettitle == "LinkAbout"
-        a(href="/")
-          h1(class="title")= cursettitle
-      else
         a(href="/set/"+cursetid+"/"+cursettitle)
           h1(class="title")= cursettitle
     block MainView

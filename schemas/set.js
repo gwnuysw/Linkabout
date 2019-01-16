@@ -25,6 +25,11 @@ const setSchema = new Schema({
     type: String,
     required: true,
   },
+  personal:{
+    type: ObjectId,
+    required: false,
+    ref: 'user'
+  },
   createAt: {
     type: Date,
     default: Date.now,
