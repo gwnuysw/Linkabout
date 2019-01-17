@@ -10,7 +10,7 @@ router.get('/kakao', passport.authenticate('kakao'));
 router.get('/kakao/callback', passport.authenticate('kakao',{
     failureRedirect: '/',
   }), (req, res) => {
-    res.render('/');
+    res.redirect('/');
 });
 
 router.get('/loginpage',  isNotLoggedIn, function(req, res, next) {

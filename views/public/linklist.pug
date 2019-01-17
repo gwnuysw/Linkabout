@@ -2,23 +2,10 @@ extends header
 
 block MainView
 
-  ul(class="horizen-menu-left")
-    if uppersettitle === undefined
-    else
-      li
-        a(href="/set/"+uppersetid+"/"+uppersettitle ) #{uppersettitle}
-    li
-      a(href="/link/document/"+cursetid+"/"+cursettitle) #{cursettitle} Document Links
-    li
-      a(href="/link/community/"+cursetid+"/"+cursettitle) #{cursettitle} Community link
-    li
-      a(href="/set/newsetform/"+cursetid+"/"+cursettitle) New Set
-    li
-      a(href="/link/newlinkform/"+cursetid+"/"+cursettitle) New Link
   ul(class="content")
     if links.length == 0
       li link가 없습니다. 첫 link를 만들어 주세요!
     each link in links
       li
-        a(href="/link/content/"+cursetid+"/"+cursettitle+"/"+link._id)
+        a(href="/link/content/"+curset._id+"/"+link._id)
           h2= link.title

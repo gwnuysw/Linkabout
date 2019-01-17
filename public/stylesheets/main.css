@@ -1,27 +1,8 @@
-a {
-  text-decoration: none;
-  color: black;
-}
+
 .content li a:hover{
   color : #009;
 }
-.horizen-menu-right {
-    list-style: none;
-    overflow: hidden;
-}
-.horizen-menu-right li {
-    float: right;
-}
-.horizen-menu-right li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-}
-.horizen-menu-right li a:hover {
-    background-color: #111;
-    color : white;
-}
+
 .horizen-menu-left {
   list-style-type: none;
   margin: 0;

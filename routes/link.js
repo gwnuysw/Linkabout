@@ -6,14 +6,17 @@ let set = require('../schemas/set');
 let user = require('../schemas/user');
 let link = require('../schemas/link');
 
-router.get('/content/:cursetid/:cursettitle/:linkid',function(req,res,next){
+router.get('/content/:cursetid/:linkid',function(req,res,next){
   let puginform;
-  link.find({_id:req.params.linkid})
-  .then((content)=>{
+  Promise.all([
+    link.find({_id:req.params.linkid}),
+    set.find({_id:req.params.cursetid})
+  ])
+
+  .then(([content, curset])=>{
     puginform = {
       isAuthed: req.isAuthenticated(),
-      cursetid: req.params.cursetid,
-      cursettitle: req.params.cursettitle,
+      curset : curset[0],
       content: content[0],
     }
     console.log(content[0]);
@@ -21,7 +24,7 @@ router.get('/content/:cursetid/:cursettitle/:linkid',function(req,res,next){
   });
 
 });
-router.get('/community/:cursetid/:cursettitle', function (req, res, next){
+router.get('/community/:cursetid', function (req, res, next){
   let puginform;
 
   Promise.all([
@@ -31,8 +34,7 @@ router.get('/community/:cursetid/:cursettitle', function (req, res, next){
   .then(([links, curset])=>{
     puginform = {
       isAuthed : req.isAuthenticated(),
-      cursetid : req.params.cursetid,
-      cursettitle : req.params.cursettitle,
+      curset : curset[0],
       links : links,
       uppersetid: curset[0].ancestor,
       uppersettitle: curset[0].ancestortitle,
@@ -42,7 +44,7 @@ router.get('/community/:cursetid/:cursettitle', function (req, res, next){
   .catch(()=>{
   });
 });
-router.get('/document/:cursetid/:cursettitle', function (req, res, next){
+router.get('/document/:cursetid', function (req, res, next){
   let puginform;
 
   Promise.all([
@@ -52,8 +54,7 @@ router.get('/document/:cursetid/:cursettitle', function (req, res, next){
   .then(([links, curset])=>{
     puginform = {
       isAuthed : req.isAuthenticated(),
-      cursetid : req.params.cursetid,
-      cursettitle : req.params.cursettitle,
+      curset : curset[0],
       links : links,
       uppersetid: curset[0].ancestor,
       uppersettitle: curset[0].ancestortitle,
@@ -63,21 +64,21 @@ router.get('/document/:cursetid/:cursettitle', function (req, res, next){
   .catch(()=>{
   });
 });
-router.get('/newlinkform/:cursetid/:cursettitle', isLoggedIn, function (req, res, next) {
+router.get('/newlinkform/:cursetid', isLoggedIn, function (req, res, next) {
   let puginform;
 
-  set.find({_id: req.params.setid})
+  set.find({_id: req.params.cursetid})
   .then((curset) => {
     puginform = {
       isAuthed : req.isAuthenticated(),
-      cursetid : req.params.cursetid,
-      cursettitle : req.params.cursettitle,
-    }
+      userid : req.user.id,
+      curset : curset[0],
+    };
     res.render('public/newlinkform', puginform);
   });
 });
 
-router.post('/newlink/:cursetid/:cursettitle', isLoggedIn, function (req, res, next) {
+router.post('/newlink/:cursetid', isLoggedIn, function (req, res, next) {
   let newlink = new link({
     title : req.body.title,
     createdBy : req.user.nick,
@@ -91,7 +92,7 @@ router.post('/newlink/:cursetid/:cursettitle', isLoggedIn, function (req, res, n
   newlink.save()
   .then((result)=>{
     console.log(result);
-    res.redirect('/link/document/'+req.params.cursetid+'/'+req.params.cursettitle);
+    res.redirect('/link/document/'+req.params.cursetid);
   })
   .catch((err)=>{
     console.error(err);

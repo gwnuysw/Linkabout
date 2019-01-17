@@ -1,17 +1,15 @@
 const KakaoStrategy = require('passport-kakao').Strategy;
 
 const user = require('../schemas/user');
-
+const set = require('../schemas/set');
 module.exports = (passport) => {
   passport.use(new KakaoStrategy({
     clientID: process.env.KAKAO_ID,
     callbackURL: '/auth/kakao/callback',
   }, async (accessToken, refreshToken, profile, done) => {
     try{
-      console.log('kakao', user);
       const exUser = await user.find({id: profile.id, provider: 'kakao'});
-      console.log('exUser',exUser[0].id);
-      if(exUser){
+      if(typeof exUser !== 'undefined' && exUser.length > 0){
         done(null, exUser);
       }
       else{
@@ -21,18 +19,19 @@ module.exports = (passport) => {
           id: profile.id,
           provider: 'kakao',
         });
+        console.log('새 유저는',newUser);
         let newpersonalset = new set({
-          title : req.user.nick,
+          title : profile.displayName,
           ancestor : '5c358828c7f4dc540bcda0df',
           ancestortitle : 'LinkAbout',
-          createdby : profile.displayName,
-          personal : profile.id,
+          createdBy : profile.displayName,
+          personal : newUser._id,
+          views : 0,
         });
         newpersonalset.save()
         .then((result)=>{
-          res.redirect('/');
+          done(null, newUser);
         })
-        done(null, newUser);
       }
     }
     catch(error){

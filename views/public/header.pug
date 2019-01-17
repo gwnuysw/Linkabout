@@ -5,17 +5,32 @@ head
   link(rel="stylesheet" href="/stylesheets/main.css")
   body
     header
-      ul(class="horizen-menu-right")
+      ul(class="horizen-menu-left")
+        if uppersettitle === undefined
+        else
+          li
+            a(href="/set/"+uppersetid) #{uppersettitle}
+        li
+          a(href="/link/document/"+curset._id) #{curset.title} Document Links
+        li
+          a(href="/link/community/"+curset._id) #{curset.title} Community Links
+        li
+          if curset.personal === undefined
+            a(href="/set/newsetform/"+curset._id) New Set
+          else
+            a(href="/userset/newsetform/"+curset._id+"/"+userid) New Set
+        li
+          a(href="/link/newlinkform/"+cursetid) New Link
         if isAuthed
           li
             a(href="/auth/logout") logout
           li
-            a(href="/MyProfile") MyPage
+            a(href="/user/"+userid) MyPage
         else
           li
             a(href="/auth/loginpage") SignIn
         li
           a(href="#news") News
-        a(href="/set/"+cursetid+"/"+cursettitle)
-          h1(class="title")= cursettitle
+      a(href="/set/"+curset._id)
+        h1(class="title")= curset.title
     block MainView

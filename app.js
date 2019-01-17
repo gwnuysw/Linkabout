@@ -5,13 +5,14 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+var back = require('express-back');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+const user = require('./routes/user');
 const auth = require('./routes/auth');
 const set = require('./routes/set');
 const link = require('./routes/link');
-const personalset = require('./routes/personalset');
+const userset = require('./routes/userset');
 
 const passportConfig = require('./passport');
 
@@ -45,12 +46,13 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(back());
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/auth', auth);
 app.use('/set', set);
 app.use('/link',link);
-app.use('/personalset', personalset);
+app.use('/userset', userset);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

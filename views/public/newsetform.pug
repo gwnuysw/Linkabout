@@ -1,9 +1,14 @@
 extends header
 block MainView
   fieldset(align="center")
-    legend 새 항목은 #{cursettitle} 아래에 만들어 집니다.
-    form(action="/set/newset/"+cursetid+"/"+cursettitle method="post" style="display:inline-block; margin:15px;")
-
-      label(for="title") Title -
-        input(type="text" name="title" id="title")
-      input(type="submit" value="Create")
+    legend 새 항목은 #{curset.title} 아래에 만들어 집니다.
+    if userid === undefined
+      form(action="/set/newset/"+curset._id method="post" style="display:inline-block; margin:15px;")
+        label(for="title") Title -
+          input(type="text" name="title" id="title")
+        input(type="submit" value="Create")
+    else
+      form(action="/userset/newset/"+curset._id method="post" style="display:inline-block; margin:15px;")
+        label(for="title") Title -
+          input(type="text" name="title" id="title")
+        input(type="submit" value="Create")
