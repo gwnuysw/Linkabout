@@ -22,7 +22,7 @@ const linkSchema = new Schema({
   },
   text:{
     type: String,
-    required: true,
+    required: false,
   },
   author:{
     type: String,
@@ -30,7 +30,7 @@ const linkSchema = new Schema({
   },
   link:{
     type: String,
-    required: true,
+    required: false,
   },
   linktype:{
     type: String,

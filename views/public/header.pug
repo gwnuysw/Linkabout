@@ -9,28 +9,44 @@ head
         if uppersettitle === undefined
         else
           li
-            a(href="/set/"+uppersetid) #{uppersettitle}
-        li
-          a(href="/link/document/"+curset._id) #{curset.title} Document Links
-        li
-          a(href="/link/community/"+curset._id) #{curset.title} Community Links
-        li
-          if curset.personal === undefined
+            if userid === undefined
+              a(href="/set/"+uppersetid) #{uppersettitle}
+            else if uppersettitle == "LinkAbout"
+              a(href="/set/"+uppersetid) #{uppersettitle}
+            else
+              a(href="/userset/"+uppersetid+"/"+userid) #{uppersettitle}
+        if userid === undefined
+          li
+            a(href="/link/document/"+curset._id) #{curset.title} Document Links
+          li
+            a(href="/link/community/"+curset._id) #{curset.title} Community Links
+          li
             a(href="/set/newsetform/"+curset._id) New Set
-          else
+          li
+            a(href="/link/newlinkform/"+cursetid) New Link
+        else
+          li
+            a(href="/userlink/document/"+curset._id+"/"+userid) #{curset.title} Document Links
+          li
+            a(href="/userlink/community/"+curset._id+"/"+userid) #{curset.title} Community Links
+          li
             a(href="/userset/newsetform/"+curset._id+"/"+userid) New Set
-        li
-          a(href="/link/newlinkform/"+cursetid) New Link
+          li
+            a(href="/userlink/newlinkform/"+curset._id+"/"+userid) New Link
         if isAuthed
           li
             a(href="/auth/logout") logout
           li
-            a(href="/user/"+userid) MyPage
+            a(href="/user/"+loginid) MyPage
         else
           li
             a(href="/auth/loginpage") SignIn
         li
-          a(href="#news") News
-      a(href="/set/"+curset._id)
-        h1(class="title")= curset.title
+          a(href="/user/find/user") Find Users
+      if user === undefined
+        a(href="/set/"+curset._id)
+          h1(class="title")= curset.title
+      else
+        a(href="/userset/"+curset._id)
+          h1(class="title")= curset.title
     block MainView

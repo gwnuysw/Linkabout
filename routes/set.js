@@ -9,7 +9,7 @@ router.get('/:cursetid', function (req, res, next) {
   let puginform;
 
   Promise.all([
-      set.find({ancestor: req.params.cursetid, personal: null}),
+      set.find({ancestor: req.params.cursetid, personal : null}),
       set.find({_id: req.params.cursetid})
   ])
   .then(([children, curset]) => {
@@ -19,15 +19,15 @@ router.get('/:cursetid', function (req, res, next) {
       children : children,
       curset : curset[0],
     }
-    if(req.isAuthenticated()){
-      puginform.userid = req.user._id;
+    if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
+      puginform.loginid = req.user._id;
     }
-    if(curset[0].ancestor === "undefined"){
+    if(curset[0].ancestor === "undefined"){//부모가 없다는 것은 최상위 개체 LinkAbout이라는 것
       puginform.uppersetid = curset[0]._id;
       puginform.uppersettitle = curset[0].title;
       res.render('public/set',puginform);
     }
-    else{
+    else{//부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
       puginform.uppersetid = curset[0].ancestor;
       puginform.uppersettitle = curset[0].ancestortitle;
 
@@ -44,6 +44,9 @@ router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {
     puginform = {
       isAuthed : req.isAuthenticated(),
       curset : curset[0],
+    }
+    if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
+      puginform.loginid = req.user._id;
     }
     res.render('public/newsetform', puginform);
   });

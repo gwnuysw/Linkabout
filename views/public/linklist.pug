@@ -5,7 +5,13 @@ block MainView
   ul(class="content")
     if links.length == 0
       li link가 없습니다. 첫 link를 만들어 주세요!
-    each link in links
-      li
-        a(href="/link/content/"+curset._id+"/"+link._id)
-          h2= link.title
+    if userid === undefined
+      each link in links
+        li
+          a(href="/link/content/"+curset._id+"/"+link._id)
+            h2= link.title
+    else
+      each link in links
+        li
+          a(href="/userlink/content/"+curset._id+"/"+link._id+"/"+userid)
+            h2= link.title

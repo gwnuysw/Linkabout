@@ -13,6 +13,7 @@ const auth = require('./routes/auth');
 const set = require('./routes/set');
 const link = require('./routes/link');
 const userset = require('./routes/userset');
+const userlink = require('./routes/userlink')
 
 const passportConfig = require('./passport');
 
@@ -53,6 +54,7 @@ app.use('/auth', auth);
 app.use('/set', set);
 app.use('/link',link);
 app.use('/userset', userset);
+app.use('/userlink', userlink);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

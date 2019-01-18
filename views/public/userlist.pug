@@ -1,0 +1,10 @@
+doctype Html
+html
+head
+  title LinkAbout
+  link(rel="stylesheet" href="/stylesheets/main.css")
+  body
+    ul(class="content")
+    each user in users
+      li
+        a(href="/userset/"+"")= user.nick
