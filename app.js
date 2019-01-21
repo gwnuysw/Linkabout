@@ -2,10 +2,15 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 var back = require('express-back');
+const helmet = require('helmet');
+const hpp = require('hpp');
+const redisstore = require('connect-redis')(session);
+
+const logger = require('./logger');
 
 const index = require('./routes/index');
 const user = require('./routes/user');
@@ -30,13 +35,20 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+if(process.env.NODE_ENV === 'production'){
+  app.use(morgan('combined'));
+  app.use(helmet());
+  app.use(hpp());
+}
+else{
+  app.use(morgan('dev'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
+app.use(express.static(path.join(__dirname, 'public')));
+const sessionOption = {
   resave: false,
   saveUninstialized: false,
   secret: process.env.COOKIE_SECRET,
@@ -44,7 +56,17 @@ app.use(session({
     httpOnly: true,
     secure: false,
   },
-}));
+  store: new redisstore({
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
+    pass: process.env.REDIS_PASSWORD,
+    logErrors: true,
+  })
+};
+if(process.env.NODE_ENV === 'production'){
+  sessionOption.proxy = true;
+}
+app.use(sessionOption);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(back());
@@ -57,7 +79,11 @@ app.use('/userset', userset);
 app.use('/userlink', userlink);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  const err = new Error('Not Found');
+  err.status = 404;
+  logger.info('hello');
+  logger.error(err.message);
+  next(err);
 });
 
 // error handler

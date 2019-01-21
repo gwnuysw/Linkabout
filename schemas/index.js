@@ -6,7 +6,7 @@ module.exports = () => {
       mongoose.set('debug', true);
     }
     mongoose.connect('mongodb://seokwon:1q2w3e!23@localhost:27017/admin', {
-      dbName: 'InBetter',
+      dbName: 'LinkAbout',
     }, (error) => {
       if (error) {
         console.log('몽고디비 연결 에러', error);
