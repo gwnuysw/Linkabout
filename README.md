@@ -21,18 +21,19 @@ LinkAbout's goal is to make both those who use LinkAbout and those who develop i
 - 메인 페이지 생성 Create main page
 - 로그인, 로그아웃 구현 Sign in, log out implementation
 - 게시 링크 항목화 link categorization
+- 링크 업로드 link upload
+- 개인 프로필 페이지 personal profile page
 
 ### Proceeding
 
-- 링크 업로드 link upload
+- 사용자 검색, 사용자 목록 보기 user search
 
 ### 개발 예정
 
-- 개인 프로필 페이지 Personal Profile Page
 - 댓글 comment
 - 게시 링크에 해당하는 질문, 답변 기능 Question and answer function
 - 팔로우 follow
-
+- 사용자 추천, 게시링크 추천 기능 recommand
 ## License
 
 [GNU Affero General Public License v3.0](https://github.com/gwnuysw/LinkAbout/blob/master/LICENSE)

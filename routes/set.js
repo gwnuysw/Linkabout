@@ -22,15 +22,17 @@ router.get('/:cursetid', function (req, res, next) {
     if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
       puginform.loginid = req.user._id;
     }
+    console.log("오류발견!!!",curset[0].ancestor == "undefined");
     if(curset[0].ancestor === "undefined"){//부모가 없다는 것은 최상위 개체 LinkAbout이라는 것
       puginform.uppersetid = curset[0]._id;
       puginform.uppersettitle = curset[0].title;
       res.render('public/set',puginform);
     }
     else{//부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
+      console.log("실행한다? 안한다?");
+      console.log("그래서 값은?", curset[0]);
       puginform.uppersetid = curset[0].ancestor;
       puginform.uppersettitle = curset[0].ancestortitle;
-
       res.render('public/set', puginform);
     }
   });

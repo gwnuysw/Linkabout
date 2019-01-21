@@ -17,15 +17,13 @@ router.get('/:userid', function(req,res,next){
 router.get('/find/user', function(req, res, next){
   let puginform;
   Promise.all([
-    user.find({}),
     set.find({ancestor: '5c358828c7f4dc540bcda0df', personal : {$ne:null}}),
   ])
-  .then(([users, userset])=>{
+  .then(([userset])=>{
+console.log(userset);
     puginform = {
       isAuthed : req.isAuthenticated(),
-      users : users,
-      uppersetid: curset[0].ancestor,
-      uppersettitle: curset[0].ancestortitle,
+      users : userset,
     }
     res.render('public/userlist', puginform);
   });

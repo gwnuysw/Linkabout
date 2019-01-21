@@ -43,10 +43,11 @@ head
             a(href="/auth/loginpage") SignIn
         li
           a(href="/user/find/user") Find Users
-      if user === undefined
+
+      if userid === undefined
         a(href="/set/"+curset._id)
           h1(class="title")= curset.title
       else
-        a(href="/userset/"+curset._id)
+        a(href="/userset/"+curset._id+"/"+userid)
           h1(class="title")= curset.title
     block MainView

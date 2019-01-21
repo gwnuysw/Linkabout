@@ -18,8 +18,8 @@ router.get('/:cursetid/:userid', function (req, res, next) {
       isAuthed : req.isAuthenticated(),
       children : children,
       curset : curset[0],
+      userid : req.params.userid,
     }
-
     puginform.userid = req.params.userid;
     //부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
     puginform.uppersetid = curset[0].ancestor;
@@ -51,7 +51,7 @@ router.post('/newset/:cursetid/:userid', isLoggedIn, function (req, res, next) {
       createdBy : req.user.nick,
       ancestor : req.params.cursetid,
       ancestortitle : curset[0].title,
-      personal : req.user._id,
+      personal : req.user._id,//user스키마의 id
       views : 0,
     });
     newset.save()
