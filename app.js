@@ -66,7 +66,7 @@ const sessionOption = {
 if(process.env.NODE_ENV === 'production'){
   sessionOption.proxy = true;
 }
-app.use(sessionOption);
+app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(back());

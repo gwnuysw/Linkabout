@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=production port=80 pm2 start app.js -i -1",
-    "dev": "nodemon app"
+    "start": "cross-env NODE_ENV=production pm2 start ./bin/www -i 0",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "connect-redis": "^3.4.0",
