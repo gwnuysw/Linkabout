@@ -13,12 +13,10 @@ const setSchema = new Schema({
   },
   ancestor:{
     type: ObjectId,
-    required: true,
     ref: 'set',
   },
   ancestortitle:{
     type: String,
-    required: true,
     ref: 'set',
   },
   views: {

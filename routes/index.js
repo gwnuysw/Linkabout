@@ -4,7 +4,23 @@ let set = require('../schemas/set');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.redirect('/set/5c358828c7f4dc540bcda0df');
+  set.find(({ancestor: null}))
+  .then((root)=>{
+    res.redirect('set/'+root[0]._id);
+  })
+  .catch(()=>{
+    let root = new set({
+      title : 'LinkAbout',
+      createdBy : '이석원',
+      views:0,
+    })
+    root.save()
+    .then((result)=>{
+      console.log(result);
+      res.redirect('set/'+result[0]._id);
+    })
+  })
+
 });
 
 module.exports = router;
