@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
     root.save()
     .then((result)=>{
       console.log(result);
-      res.redirect('set/'+result[0]._id);
+      res.redirect('set/'+result._id);
     })
   })
 
