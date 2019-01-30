@@ -13,6 +13,7 @@ router.get('/:cursetid', function (req, res, next) {
       set.find({_id: req.params.cursetid})
   ])
   .then(([children, curset]) => {
+    console.log('??', curset);
     console.log('사용자', curset[0])
     puginform = {
       isAuthed : req.isAuthenticated(),

@@ -20,18 +20,22 @@ module.exports = (passport) => {
           provider: 'kakao',
         });
         console.log('새 유저는',newUser);
-        let newpersonalset = new set({
-          title : profile.displayName,
-          ancestor : '5c358828c7f4dc540bcda0df',
-          ancestortitle : 'LinkAbout',
-          createdBy : profile.displayName,
-          personal : newUser._id,
-          views : 0,
+        set.find({ancestor:null})
+        .then((rootset)=>{
+          console.log("login borblem",rootset);
+          let newpersonalset = new set({
+            title : profile.displayName,
+            ancestor : rootset[0]._id,
+            ancestortitle : rootset[0].title,
+            createdBy : profile.displayName,
+            personal : newUser._id,
+            views : 0,
+          });
+          newpersonalset.save()
+          .then((result)=>{
+            done(null, newUser);
+          })
         });
-        newpersonalset.save()
-        .then((result)=>{
-          done(null, newUser);
-        })
       }
     }
     catch(error){
