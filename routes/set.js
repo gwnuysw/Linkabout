@@ -52,26 +52,25 @@ router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {
 });
 
 router.post('/newset/:cursetid', isLoggedIn, function (req, res, next) {
-  let passcurset;
   set.find({_id:req.params.cursetid})
   .then((curset)=>{
-    passcurset = curset;
-  });
-  let newset = new set({
-    title : req.body.title,
-    createdBy : req.user.nick,
-    ancestor : req.params.cursetid,
-    ancestortitle : passcurset[0].ancestortitle,
-    views : 0,
-  });
-  newset.save()
-  .then((result)=>{
-    console.log(result);
-    res.redirect('/set/'+req.params.cursetid);
-  })
-  .catch((err)=>{
-    console.error(err);
-    next(err);
+    console.log('wtf',curset);
+    let newset = new set({
+      title : req.body.title,
+      createdBy : req.user.nick,
+      ancestor : req.params.cursetid,
+      ancestortitle : curset[0].title,
+      views : 0,
+    });
+    newset.save()
+    .then((result)=>{
+      console.log(result);
+      res.redirect('/set/'+req.params.cursetid);
+    })
+    .catch((err)=>{
+      console.error(err);
+      next(err);
+    });
   });
 });
 module.exports = router;

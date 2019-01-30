@@ -82,7 +82,6 @@ router.get('/newlinkform/:cursetid', isLoggedIn, function (req, res, next) {
   .then((curset) => {
     puginform = {
       isAuthed : req.isAuthenticated(),
-      userid : req.user.id,
       curset : curset[0],
     };
     if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
@@ -106,11 +105,11 @@ router.post('/newlink/:cursetid', isLoggedIn, function (req, res, next) {
   newlink.save()
   .then((result)=>{
     console.log(result);
-    if(req.body.linktyp == 'document'){
-      res.redirect('/userlink/document/'+req.params.cursetid+"/"+req.params.userid);
+    if(req.body.linktype == 'document'){
+      res.redirect('/link/document/'+req.params.cursetid);
     }
     else{
-      res.redirect('/userlink/community/'+req.params.cursetid+"/"+req.params.userid);
+      res.redirect('/link/community/'+req.params.cursetid);
     }
   })
   .catch((err)=>{

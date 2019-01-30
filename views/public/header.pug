@@ -15,24 +15,14 @@ head
               a(href="/set/"+uppersetid) #{uppersettitle}
             else
               a(href="/userset/"+uppersetid+"/"+userid) #{uppersettitle}
-        if userid === undefined
+        li
+          a(href="/link/document/"+curset._id) #{curset.title} Document Links
+        li
+          a(href="/link/community/"+curset._id) #{curset.title} Community Links
+        li
+          a(href="/set/newsetform/"+curset._id) New Set
           li
-            a(href="/link/document/"+curset._id) #{curset.title} Document Links
-          li
-            a(href="/link/community/"+curset._id) #{curset.title} Community Links
-          li
-            a(href="/set/newsetform/"+curset._id) New Set
-          li
-            a(href="/link/newlinkform/"+cursetid) New Link
-        else
-          li
-            a(href="/userlink/document/"+curset._id+"/"+userid) #{curset.title} Document Links
-          li
-            a(href="/userlink/community/"+curset._id+"/"+userid) #{curset.title} Community Links
-          li
-            a(href="/userset/newsetform/"+curset._id+"/"+userid) New Set
-          li
-            a(href="/userlink/newlinkform/"+curset._id+"/"+userid) New Link
+            a(href="/link/newlinkform/"+curset._id) New Link
         if isAuthed
           li
             a(href="/auth/logout") logout
