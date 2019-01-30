@@ -9,7 +9,7 @@ module.exports = () => {
     //mongoose.connect('mongodb://seokwon:1q2w3e!23@localhost:27017/admin', {
 
     //mongodb 사이트에서 실행되는 배포 앱용 db
-    mongoose.connect('mongodb://linkaboutuser:1q2w3e!23@cluster0.mongodb.net/admin', { 
+    mongoose.connect('mongodb+srv://linkaboutuser:1q2w3e!23@cluster0-dd0uk.mongodb.net/test?retryWrites=true', {
       dbName: 'LinkAbout',
     }, (error) => {
       if (error) {
