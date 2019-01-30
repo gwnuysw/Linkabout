@@ -5,7 +5,11 @@ module.exports = () => {
     if (process.env.NODE_ENV !== 'production') {
       mongoose.set('debug', true);
     }
-    mongoose.connect('mongodb://seokwon:1q2w3e!23@localhost:27017/admin', {
+    //내컴퓨터에서 실행 되는 테스트용 db
+    //mongoose.connect('mongodb://seokwon:1q2w3e!23@localhost:27017/admin', {
+
+    //mongodb 사이트에서 실행되는 배포 앱용 db
+    mongoose.connect('mongodb://linkaboutuser:1q2w3e!23@cluster0.mongodb.net/admin', { 
       dbName: 'LinkAbout',
     }, (error) => {
       if (error) {
