@@ -27,30 +27,6 @@ router.get('/content/:cursetid/:linkid',function(req,res,next){
   });
 });
 
-router.get('/community/:cursetid', function (req, res, next){
-  let puginform;
-
-  Promise.all([
-    link.find({belong : req.params.cursetid, linktype : 'community'}),
-    set.find({_id: req.params.cursetid})
-  ])
-  .then(([links, curset])=>{
-    puginform = {
-      isAuthed : req.isAuthenticated(),
-      curset : curset[0],
-      links : links,
-      uppersetid: curset[0].ancestor,
-      uppersettitle: curset[0].ancestortitle,
-    }
-    if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
-      puginform.loginid = req.user._id;
-    }
-    res.render('public/linklist', puginform);
-  })
-  .catch(()=>{
-  });
-});
-
 router.get('/document/:cursetid', function (req, res, next){
   let puginform;
 
