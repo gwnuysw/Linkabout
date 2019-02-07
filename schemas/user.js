@@ -10,8 +10,11 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
+<<<<<<< HEAD
     required: true,
     unique: true,
+=======
+>>>>>>> 14a46ac1... 에효...카카오패스포트
   },
   nick:{
     type: String,
