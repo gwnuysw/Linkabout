@@ -1,0 +1,4 @@
+{
+  "presets": ["@babel/env", "@babel/react"],
+  "plugins": ["inline-react-svg", "css-modules-transform", "@babel/plugin-proposal-class-properties"]
+}

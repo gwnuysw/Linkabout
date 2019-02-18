@@ -4,7 +4,8 @@ let express = require('express');
 let router = express.Router();
 let set = require('../schemas/set');
 let user = require('../schemas/user');
-
+let template = require('../views/rootTemplate');
+let ssr = require('../views/server/rootServer');
 router.get('/:cursetid', function (req, res, next) {
   let puginform;
 
@@ -26,12 +27,20 @@ router.get('/:cursetid', function (req, res, next) {
     if(curset[0].ancestor === "undefined"){//부모가 없다는 것은 최상위 개체 LinkAbout이라는 것
       puginform.uppersetid = curset[0]._id;
       puginform.uppersettitle = curset[0].title;
-      res.render('public/set',puginform);
+      //res.render('public/set',puginform);
+      console.log("this is react");
+      let content = ssr();
+      let rendered = template(content);
+      res.send(rendered);
     }
     else{//부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
       puginform.uppersetid = curset[0].ancestor;
       puginform.uppersettitle = curset[0].ancestortitle;
-      res.render('public/set', puginform);
+      //res.render('public/set', puginform);
+      console.log("this is react");
+      let content = ssr();
+      let rendered = template(content);
+      res.send(rendered);
     }
   });
 });

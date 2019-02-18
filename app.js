@@ -10,8 +10,6 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const redisstore = require('connect-redis')(session);
 
-const logger = require('./logger');
-
 const index = require('./routes/index');
 const user = require('./routes/user');
 const auth = require('./routes/auth');
@@ -48,6 +46,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.resolve(__dirname, 'assets')));
 const sessionOption = {
   resave: false,
   saveUninstialized: false,
@@ -81,8 +80,6 @@ app.use('/userlink', userlink);
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
-  logger.info('hello');
-  logger.error(err.message);
   next(err);
 });
 

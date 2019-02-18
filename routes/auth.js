@@ -13,7 +13,7 @@ router.get('/kakao/callback', passport.authenticate('kakao',{
     res.redirect('/');
 });
 
-router.get('/loginpage',  isNotLoggedIn, function(req, res, next) {
+router.get('/signinpage',  isNotLoggedIn, function(req, res, next) {
   res.render('public/loginpage');
 });
 router.get('/logout', isLoggedIn, function(req, res, next) {
