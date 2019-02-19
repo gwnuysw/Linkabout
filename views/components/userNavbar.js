@@ -72,10 +72,22 @@ function (_React$Component) {
         className: "ml-auto",
         navbar: true
       }, _react.default.createElement(_reactstrap.NavItem, null, _react.default.createElement(_reactstrap.NavLink, {
-        href: "/components/"
-      }, "Sign-In")), _react.default.createElement(_reactstrap.NavItem, null, _react.default.createElement(_reactstrap.NavLink, {
-        href: "https://github.com/reactstrap/reactstrap"
-      }, "Sign-Un"))))));
+        href: "/auth/signinpage"
+      }, "Sign-In")), _react.default.createElement(_reactstrap.UncontrolledDropdown, {
+        nav: true,
+        inNavbar: true
+      }, _react.default.createElement(_reactstrap.DropdownToggle, {
+        nav: true,
+        caret: true
+      }, "Sign In"), _react.default.createElement(_reactstrap.DropdownMenu, {
+        right: true
+      }, _react.default.createElement(_reactstrap.DropdownItem, {
+        tag: "a",
+        href: "/auth/google"
+      }, "Sign In with Google"), _react.default.createElement(_reactstrap.DropdownItem, {
+        tag: "a",
+        href: "/auth/kakao"
+      }, "Sign In with Kakao")))))));
     }
   }]);
 

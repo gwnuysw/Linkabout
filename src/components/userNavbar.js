@@ -37,6 +37,19 @@ export default class UserNavbar extends React.Component {
               <NavItem>
                 <NavLink href="/auth/signinpage">Sign-In</NavLink>
               </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Sign In
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem tag="a" href="/auth/google">
+                    Sign In with Google
+                  </DropdownItem>
+                  <DropdownItem tag="a" href="/auth/kakao">
+                    Sign In with Kakao
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
