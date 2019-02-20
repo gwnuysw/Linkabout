@@ -17,7 +17,9 @@ router.get('/kakao/callback', passport.authenticate('kakao',{
 //   request.  The first step in Google authentication will involve redirecting
 //   the user to google.com.  After authorization, Google will redirect the user
 //   back to this application at /auth/google/callback
-router.get('/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login', 'email'] }));
+router.get('/google', passport.authenticate('google', { scope: [
+                'https://www.googleapis.com/auth/plus.login',
+                'https://www.googleapis.com/auth/userinfo.email'] }));
 
 // GET /auth/google/callback
 //   Use passport.authenticate() as route middleware to authenticate the
@@ -30,11 +32,21 @@ router.get('/google/callback',
     res.redirect('/');
   }
 );
-
-router.get('/signinpage',  isNotLoggedIn, function(req, res, next) {
-  res.render('public/loginpage');
+router.get('/signcheck', function(req, res, next){
+  let data = {};
+  if(req.isAuthenticated()){
+    data.isSignin = true;
+    data.userName = req.user.nick;
+    console.log('looooooooooooged?',JSON.stringify(data));
+    res.send(JSON.stringify(data));
+  }
+  else{
+    data.isSignin = false;
+    console.log('looooooooooooged?',JSON.stringify(data));
+    res.send(JSON.stringify(data));
+  }
 });
-router.get('/logout', isLoggedIn, function(req, res, next) {
+router.get('/signout', isLoggedIn, function(req, res, next) {
   req.logout();
   req.session.destroy();
   res.redirect('/');

@@ -19,19 +19,21 @@ module.exports = (passport) => {
         // });
         try{
           console.log('token',token);
-          const exUser = await user.find({id: profile.id, provider: 'google'});
+          console.log(profile.emails[0].value);
+          const exUser = await user.find({email: profile.emails[0].value});
           if(typeof exUser !== 'undefined' && exUser.length > 0){
             done(null, exUser);
           }
           else{
             console.log('email find', profile._json);
+            //신규 유저 가입
             const newUser = await user.create({
-              email: profile._json && profile._json.kaccount_email,
+              email: profile.emails[0].value,
               nick: profile.displayName,
-              id: profile.id,
               provider: 'google',
             });
             console.log('새 유저는',newUser);
+            //개인 페이지 전용 셋 생성?
             set.find({ancestor:null})
             .then((rootset)=>{
               console.log("login borblem",rootset);

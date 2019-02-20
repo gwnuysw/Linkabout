@@ -71,9 +71,7 @@ function (_React$Component) {
       }, _react.default.createElement(_reactstrap.Nav, {
         className: "ml-auto",
         navbar: true
-      }, _react.default.createElement(_reactstrap.NavItem, null, _react.default.createElement(_reactstrap.NavLink, {
-        href: "/auth/signinpage"
-      }, "Sign-In")), _react.default.createElement(_reactstrap.UncontrolledDropdown, {
+      }, _react.default.createElement(_reactstrap.UncontrolledDropdown, {
         nav: true,
         inNavbar: true
       }, _react.default.createElement(_reactstrap.DropdownToggle, {

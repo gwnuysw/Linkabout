@@ -11,16 +11,16 @@ const setSchema = new Schema({
     type: String,
     required: true,
   },
-  ancestor:{
-    type: ObjectId,
+  up:{
+    type: [ObjectId],
     ref: 'set',
   },
-  ancestortitle:{
-    type: String,
+  down: {
+    type: [ObjectId],
     ref: 'set',
   },
   views: {
-    type: String,
+    type: Number,
     required: true,
   },
   personal:{

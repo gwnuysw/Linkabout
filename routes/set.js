@@ -6,6 +6,8 @@ let set = require('../schemas/set');
 let user = require('../schemas/user');
 let template = require('../views/rootTemplate');
 let ssr = require('../views/server/rootServer');
+
+//응답해줘야 하는 것들 현재셋의 정보, 현재셋과 연결된 셋들, 현재셋의 다큐먼트 링크들. 현재 써져 있는 것들은 다 버려야 할지도 모른다.
 router.get('/:cursetid', function (req, res, next) {
   let puginform;
 
