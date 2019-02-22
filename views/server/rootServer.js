@@ -10,8 +10,11 @@ var _root = _interopRequireDefault(require("../components/root"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = function render() {
+module.exports = function render(inform) {
   // Model the initial state
-  var content = (0, _server.renderToString)(_react.default.createElement(_root.default, null));
+  console.log('rootserver inform', inform);
+  var content = (0, _server.renderToString)(_react.default.createElement(_root.default, {
+    setInform: inform
+  }));
   return content;
 };

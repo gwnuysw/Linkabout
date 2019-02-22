@@ -11,10 +11,6 @@ const setSchema = new Schema({
     type: String,
     required: true,
   },
-  up:{
-    type: [ObjectId],
-    ref: 'set',
-  },
   down: {
     type: [ObjectId],
     ref: 'set',

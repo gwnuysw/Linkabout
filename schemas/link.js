@@ -12,7 +12,7 @@ const linkSchema = new Schema({
     required: true,
   },
   belong:{
-    type: ObjectId,
+    type: [ObjectId],
     required: true,
     ref: 'set',
   },

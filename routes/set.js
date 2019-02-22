@@ -3,48 +3,50 @@ const {isLoggedIn, isNotLoggedIn} = require('./checkLogin');
 let express = require('express');
 let router = express.Router();
 let set = require('../schemas/set');
+let link = require('../schemas/link');
 let user = require('../schemas/user');
 let template = require('../views/rootTemplate');
 let ssr = require('../views/server/rootServer');
 
 //응답해줘야 하는 것들 현재셋의 정보, 현재셋과 연결된 셋들, 현재셋의 다큐먼트 링크들. 현재 써져 있는 것들은 다 버려야 할지도 모른다.
-router.get('/:cursetid', function (req, res, next) {
-  let puginform;
-
+router.get('client/:cursetid', function (req, res, next) {
+  let inform;
   Promise.all([
-      set.find({ancestor: req.params.cursetid, personal : null}),
-      set.find({_id: req.params.cursetid})
+      //상위 카테고리를 검색한다.
+      set.find({down: req.params.cursetid }),
+      //현재 카테고리를 검색한다.???
+      set.find({_id: req.params.cursetid}),
+      //관련 링크를 검색한다.
+      link.find({belong: req.params.cursetid})
   ])
-  .then(([children, curset]) => {
-    console.log('??', curset);
-    console.log('사용자', curset[0])
-    puginform = {
-      isAuthed : req.isAuthenticated(),
-      children : children,
-      curset : curset[0],
+  .then(async ([upset, curset, link]) => {
+    inform = {
+      upset : upset,
+      curset : curset,
+      link : link,
+      downset : []
     }
-    if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
-      puginform.loginid = req.user._id;
+    //하위 카테고리도 검색해야 한다.
+    //for var in array 방법을 쓰면 배열의 원소가 아니라 프로퍼티들이 쫘악 출력된다;;;
+    //map을 써도 안됀다. map(callback)형태인데 callback 자체가 비동기로 실행되어 하위 then 실행후 콜백이 실행된다;;;
+    //for of 를 시도해 본다. then 함수에 asyn를 붙이고 pormise에 await붙이니 해결했다.
+    for(let downId of curset[0].down){
+        await set.find({_id: downId})
+        .then((downset)=>{
+          inform.downset.push(downset[0]);
+        });
     }
-    if(curset[0].ancestor === "undefined"){//부모가 없다는 것은 최상위 개체 LinkAbout이라는 것
-      puginform.uppersetid = curset[0]._id;
-      puginform.uppersettitle = curset[0].title;
-      //res.render('public/set',puginform);
-      console.log("this is react");
-      let content = ssr();
-      let rendered = template(content);
-      res.send(rendered);
-    }
-    else{//부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
-      puginform.uppersetid = curset[0].ancestor;
-      puginform.uppersettitle = curset[0].ancestortitle;
-      //res.render('public/set', puginform);
-      console.log("this is react");
-      let content = ssr();
-      let rendered = template(content);
-      res.send(rendered);
-    }
+    return ;
+  })
+  .then((result)=>{
+    res.send(JSON.stringify(inform));
   });
+});
+
+router.get('/:cursetid', function (req, res, next) {
+  let content = ssr();
+  let rendered = template(content);
+  res.send(rendered);
 });
 
 router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {

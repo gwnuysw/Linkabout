@@ -67,6 +67,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      console.log('this is information', this.props.setInform);
       fetch('http://localhost/auth/signcheck').then(function (response) {
         return response.json();
       }).then(function (data) {
