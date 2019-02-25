@@ -7,10 +7,9 @@ export default class Root extends React.Component {
   state = {
     isSignin : false
   }
-  async componentDidMount() {
+  componentDidMount() {
     console.log('this is information', this.props.setInform);
-    await fetch('http://localhost/set/client/')
-    await fetch('http://localhost/auth/signcheck')
+    fetch('http://localhost/auth/signcheck')
       .then(response => response.json())
       .then((data) => {
         this.setState({...data});
