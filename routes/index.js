@@ -20,6 +20,7 @@ router.get('/', function (req, res, next) {
       createdBy : '이석원',
       views: 0,
     })
+    console.log('이라ㅓ매댜ㅣㅁ낭ㄹ 에러');
     root.down = [...root.down, people._id];
     return [people.save(), root];
   })
