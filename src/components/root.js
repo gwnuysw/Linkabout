@@ -1,5 +1,4 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import SigninedNavbar from './signinedNavbar';
 import SignoutedNavbar from './signoutedNavbar';
 import ColContainer from './colContainer';

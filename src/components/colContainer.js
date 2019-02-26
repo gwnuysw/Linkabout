@@ -1,18 +1,42 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import CategoryList from './categoryList';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { spacing } from '@material-ui/system';
 
-export default class colContainer extends React.Component {
-  render() {
+const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  },
+});
+function colContainer(props) {
+  const { classes } = props;
 
-    return (
-      <Container fluid style={{marginTop:'50px'}}>
-        <Row>
-          <Col xs="4"><CategoryList /></Col>
-          <Col xs="4">.col-auto - variable width content</Col>
-          <Col xs="3">.col-3</Col>
-        </Row>
-      </Container>
-    );
-  }
+  return (
+    <div className={classes.root} >
+      <Grid container spacing={24}>
+        <Grid item xs>
+          <Paper className={classes.paper}>xs</Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>xs=6</Paper>
+        </Grid>
+        <Grid item xs>
+          <Paper className={classes.paper}>xs</Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
+
+colContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(colContainer);

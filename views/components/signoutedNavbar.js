@@ -7,89 +7,62 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactstrap = require("reactstrap");
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _styles = require("@material-ui/core/styles");
+
+var _AppBar = _interopRequireDefault(require("@material-ui/core/AppBar"));
+
+var _Toolbar = _interopRequireDefault(require("@material-ui/core/Toolbar"));
+
+var _Typography = _interopRequireDefault(require("@material-ui/core/Typography"));
+
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
+var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
+
+var _Menu = _interopRequireDefault(require("@material-ui/icons/Menu"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-var signoutedNavbar =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(signoutedNavbar, _React$Component);
-
-  function signoutedNavbar(props) {
-    var _this;
-
-    _classCallCheck(this, signoutedNavbar);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(signoutedNavbar).call(this, props));
-    _this.toggle = _this.toggle.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.state = {
-      isOpen: false
-    };
-    return _this;
+var styles = {
+  root: {
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
   }
+};
 
-  _createClass(signoutedNavbar, [{
-    key: "toggle",
-    value: function toggle() {
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement(_reactstrap.Navbar, {
-        color: "light",
-        light: true,
-        expand: "md"
-      }, _react.default.createElement(_reactstrap.NavbarBrand, {
-        href: "/"
-      }, "LinkAbout"), _react.default.createElement(_reactstrap.NavbarToggler, {
-        onClick: this.toggle
-      }), _react.default.createElement(_reactstrap.Collapse, {
-        isOpen: this.state.isOpen,
-        navbar: true
-      }, _react.default.createElement(_reactstrap.Nav, {
-        className: "ml-auto",
-        navbar: true
-      }, _react.default.createElement(_reactstrap.UncontrolledDropdown, {
-        nav: true,
-        inNavbar: true
-      }, _react.default.createElement(_reactstrap.DropdownToggle, {
-        nav: true,
-        caret: true
-      }, "Sign In"), _react.default.createElement(_reactstrap.DropdownMenu, {
-        right: true
-      }, _react.default.createElement(_reactstrap.DropdownItem, {
-        tag: "a",
-        href: "/auth/google"
-      }, "Sign In with Google"), _react.default.createElement(_reactstrap.DropdownItem, {
-        tag: "a",
-        href: "/auth/kakao"
-      }, "Sign In with Kakao")))))));
-    }
-  }]);
+function SignoutedNavbar(props) {
+  var classes = props.classes;
+  return _react.default.createElement("div", {
+    className: classes.root
+  }, _react.default.createElement(_AppBar.default, {
+    position: "static"
+  }, _react.default.createElement(_Toolbar.default, null, _react.default.createElement(_IconButton.default, {
+    className: classes.menuButton,
+    color: "inherit",
+    "aria-label": "Menu"
+  }, _react.default.createElement(_Menu.default, null)), _react.default.createElement(_Typography.default, {
+    variant: "h6",
+    color: "inherit",
+    className: classes.grow
+  }, "LinkAbout"), _react.default.createElement(_Button.default, {
+    tag: "a",
+    href: "/auth/google",
+    color: "inherit"
+  }, "Login with google"))));
+}
 
-  return signoutedNavbar;
-}(_react.default.Component);
+SignoutedNavbar.propTypes = {
+  classes: _propTypes.default.object.isRequired
+};
 
-exports.default = signoutedNavbar;
+var _default = (0, _styles.withStyles)(styles)(SignoutedNavbar);
+
+exports.default = _default;

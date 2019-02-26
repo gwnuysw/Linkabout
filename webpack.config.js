@@ -1,7 +1,7 @@
 const path = require('path');
 module.exports = {
   entry: {
-    main: './src/client/rootServer.js'
+    main: './src/client/client.js'
   },
   output: {
     path: path.resolve(__dirname, 'assets'),

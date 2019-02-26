@@ -5,8 +5,8 @@ let router = express.Router();
 let set = require('../schemas/set');
 let link = require('../schemas/link');
 let user = require('../schemas/user');
-let template = require('../views/rootTemplate');
-let ssr = require('../views/server/rootServer');
+let template = require('../views/Template');
+let ssr = require('../views/server/server');
 
 //응답해줘야 하는 것들 현재셋의 정보, 현재셋과 연결된 셋들, 현재셋의 다큐먼트 링크들. 현재 써져 있는 것들은 다 버려야 할지도 모른다.
 router.get('client/:cursetid', function (req, res, next) {
