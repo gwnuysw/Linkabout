@@ -100,6 +100,16 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
+      var curset;
+
+      if (this.props.informOfSet != null) {
+        curset = this.props.informOfSet.curset[0];
+      } else {
+        curset.title = 4;
+        curset.createBy = 5;
+      }
+
+      console.log('check curset', this.props.informOfSet);
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_Grid.default, {
@@ -114,8 +124,8 @@ function (_React$Component) {
       }, _react.default.createElement(_List.default, {
         dense: false
       }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: "Single-line item",
-        secondary: "Secondary text"
+        primary: curset.title,
+        secondary: curset.createdBy
       })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
     }
   }]);

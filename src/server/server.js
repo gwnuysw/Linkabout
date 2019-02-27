@@ -13,7 +13,7 @@ import {
 import renderFullPage from '../Template';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
-
+import { StaticRouter } from 'react-router-dom';
 module.exports = function render() {
   // Model the initial state
   // Create a sheetsRegistry instance.
@@ -37,7 +37,9 @@ module.exports = function render() {
   const html = ReactDOMServer.renderToString(
     <JssProvider registry={sheetsRegistry} generateClassName={generateClassName}>
       <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
-        <Root />
+        <StaticRouter location="/">
+          <Root />
+        </StaticRouter>
       </MuiThemeProvider>
     </JssProvider>,
   );

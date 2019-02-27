@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import { spacing } from '@material-ui/system';
 import CategoryList from './categoryList';
 import LinkList from './linkList';
-
+import { Route, Link } from 'react-router-dom';
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -17,28 +17,40 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   },
 });
-function colContainer(props) {
-  const { classes } = props;
-
-  return (
-    <div className={classes.root} >
-      <Grid container spacing={24}>
-        <Grid item xs>
-          <Paper className={classes.paper}>
-            <CategoryList />
-          </Paper>
+class colContainer extends React.Component {
+  componentDidMount() {
+    if(this.props.match.url == "/"){
+      fetch('http://localhost/set/5c7382e9ae78c74259616d6c')
+      .then(response=>response.json())
+      .then((data)=>{
+        this.setState({...data});
+        console.log(this.state);
+      })
+    }
+    console.log('check url', this.props.match.url);
+  };
+  render () {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root} >
+        <Grid container spacing={24}>
+          <Grid item xs>
+            <Paper className={classes.paper}>
+              <CategoryList informOfSet={this.state}/>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <LinkList />
+            </Paper>
+          </Grid>
+          <Grid item xs>
+            <Paper className={classes.paper}>xs</Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <LinkList />
-          </Paper>
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>xs</Paper>
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 colContainer.propTypes = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import SigninedNavbar from './signinedNavbar';
 import SignoutedNavbar from './signoutedNavbar';
 import ColContainer from './colContainer';
@@ -27,7 +28,7 @@ export default class Root extends React.Component {
     return(
       <div>
         {navBar}
-        <ColContainer />
+          <Route path="/" component={ColContainer} />
       </div>
     );
   }

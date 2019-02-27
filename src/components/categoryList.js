@@ -39,9 +39,18 @@ const styles = theme => ({
 // }
 
 class CategoryList extends React.Component {
+
   render() {
     const { classes } = this.props;
-
+    let curset;
+    if(this.props.informOfSet != null){
+      curset = this.props.informOfSet.curset[0];
+    }
+    else{
+      curset.title = 4;
+      curset.createBy = 5;
+    }
+    console.log('check curset',this.props.informOfSet);
     return (
       <div className={classes.root}>
         <Grid container spacing={16}>
@@ -50,8 +59,8 @@ class CategoryList extends React.Component {
               <List dense={false}>
                   <ListItem>
                     <ListItemText
-                      primary="Single-line item"
-                      secondary='Secondary text'
+                      primary={curset.title}
+                      secondary={curset.createdBy}
                     />
                   </ListItem>
                   <ListItem>

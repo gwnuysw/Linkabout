@@ -14,6 +14,8 @@ var _red = _interopRequireDefault(require("@material-ui/core/colors/red"));
 
 var _JssProvider = _interopRequireDefault(require("react-jss/lib/JssProvider"));
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -58,7 +60,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_root.default, null);
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_root.default, null));
     }
   }]);
 

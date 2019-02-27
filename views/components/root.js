@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _signinedNavbar = _interopRequireDefault(require("./signinedNavbar"));
 
 var _signoutedNavbar = _interopRequireDefault(require("./signoutedNavbar"));
@@ -88,7 +90,10 @@ function (_React$Component) {
         navBar = _react.default.createElement(_signoutedNavbar.default, null);
       }
 
-      return _react.default.createElement("div", null, navBar, _react.default.createElement(_colContainer.default, null));
+      return _react.default.createElement("div", null, navBar, _react.default.createElement(_reactRouterDom.Route, {
+        path: "/",
+        component: _colContainer.default
+      }));
     }
   }]);
 

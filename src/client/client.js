@@ -9,6 +9,7 @@ import {
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 import JssProvider from 'react-jss/lib/JssProvider';
+import { BrowserRouter } from 'react-router-dom';
 class Main extends React.Component {
   // Remove the server-side injected CSS.
   componentDidMount() {
@@ -18,7 +19,11 @@ class Main extends React.Component {
     }
   }
   render() {
-    return <Root />;
+    return(
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    );
   }
 }
 // Create a theme instance.
