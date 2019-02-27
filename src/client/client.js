@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from '../components/root';
-
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  createGenerateClassName,
+} from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red';
+import JssProvider from 'react-jss/lib/JssProvider';
 class Main extends React.Component {
   // Remove the server-side injected CSS.
   componentDidMount() {

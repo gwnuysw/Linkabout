@@ -6,6 +6,14 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _root = _interopRequireDefault(require("../components/root"));
 
+var _styles = require("@material-ui/core/styles");
+
+var _green = _interopRequireDefault(require("@material-ui/core/colors/green"));
+
+var _red = _interopRequireDefault(require("@material-ui/core/colors/red"));
+
+var _JssProvider = _interopRequireDefault(require("react-jss/lib/JssProvider"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -58,10 +66,10 @@ function (_React$Component) {
 }(_react.default.Component); // Create a theme instance.
 
 
-var theme = createMuiTheme({
+var theme = (0, _styles.createMuiTheme)({
   palette: {
-    primary: green,
-    accent: red,
+    primary: _green.default,
+    accent: _red.default,
     type: 'light'
   },
   typography: {
@@ -69,10 +77,10 @@ var theme = createMuiTheme({
   }
 }); // Create a new class name generator.
 
-var generateClassName = createGenerateClassName();
+var generateClassName = (0, _styles.createGenerateClassName)();
 
-_reactDom.default.hydrate(_react.default.createElement(JssProvider, {
+_reactDom.default.hydrate(_react.default.createElement(_JssProvider.default, {
   generateClassName: generateClassName
-}, _react.default.createElement(MuiThemeProvider, {
+}, _react.default.createElement(_styles.MuiThemeProvider, {
   theme: theme
 }, _react.default.createElement(Main, null))), document.getElementById('root'));

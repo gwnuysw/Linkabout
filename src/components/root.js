@@ -19,7 +19,6 @@ export default class Root extends React.Component {
     const isSignin = this.state.isSignin;
 
     let navBar;
-
     if (isSignin) {
       navBar = <SigninedNavbar userName={this.state.userName}/>;
     } else {
@@ -30,7 +29,6 @@ export default class Root extends React.Component {
         {navBar}
         <ColContainer />
       </div>
-
     );
   }
 }

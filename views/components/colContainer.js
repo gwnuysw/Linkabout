@@ -17,6 +17,10 @@ var _Grid = _interopRequireDefault(require("@material-ui/core/Grid"));
 
 var _system = require("@material-ui/system");
 
+var _categoryList = _interopRequireDefault(require("./categoryList"));
+
+var _linkList = _interopRequireDefault(require("./linkList"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = function styles(theme) {
@@ -44,12 +48,12 @@ function colContainer(props) {
     xs: true
   }, _react.default.createElement(_Paper.default, {
     className: classes.paper
-  }, "xs")), _react.default.createElement(_Grid.default, {
+  }, _react.default.createElement(_categoryList.default, null))), _react.default.createElement(_Grid.default, {
     item: true,
     xs: 6
   }, _react.default.createElement(_Paper.default, {
     className: classes.paper
-  }, "xs=6")), _react.default.createElement(_Grid.default, {
+  }, _react.default.createElement(_linkList.default, null))), _react.default.createElement(_Grid.default, {
     item: true,
     xs: true
   }, _react.default.createElement(_Paper.default, {

@@ -41,6 +41,8 @@ var _Notifications = _interopRequireDefault(require("@material-ui/icons/Notifica
 
 var _MoreVert = _interopRequireDefault(require("@material-ui/icons/MoreVert"));
 
+var _Button = _interopRequireDefault(require("@material-ui/core/Button"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -232,11 +234,15 @@ function (_React$Component) {
         variant: "h6",
         color: "inherit",
         noWrap: true
-      }, "Material-UI"), _react.default.createElement("div", {
+      }, this.props.userName), _react.default.createElement("div", {
         className: classes.grow
       }), _react.default.createElement("div", {
         className: classes.sectionDesktop
-      }, _react.default.createElement(_IconButton.default, {
+      }, _react.default.createElement(_Button.default, {
+        tag: "a",
+        href: "/auth/signout",
+        color: "inherit"
+      }, "Logout"), _react.default.createElement(_IconButton.default, {
         color: "inherit"
       }, _react.default.createElement(_Badge.default, {
         badgeContent: 4,

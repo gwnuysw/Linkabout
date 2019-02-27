@@ -16,7 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import Button from '@material-ui/core/Button';
 const styles = theme => ({
   root: {
     width: '100%',
@@ -146,10 +146,13 @@ class SigninedNavbar extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Material-UI
+              {this.props.userName}
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <Button tag="a"  href="/auth/signout" color="inherit">
+                Logout
+              </Button>
               <IconButton color="inherit">
                 <Badge badgeContent={4} color="secondary">
                   <MailIcon />

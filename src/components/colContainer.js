@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { spacing } from '@material-ui/system';
+import CategoryList from './categoryList';
+import LinkList from './linkList';
 
 const styles = theme => ({
   root: {
@@ -22,10 +24,14 @@ function colContainer(props) {
     <div className={classes.root} >
       <Grid container spacing={24}>
         <Grid item xs>
-          <Paper className={classes.paper}>xs</Paper>
+          <Paper className={classes.paper}>
+            <CategoryList />
+          </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          <Paper className={classes.paper}>
+            <LinkList />
+          </Paper>
         </Grid>
         <Grid item xs>
           <Paper className={classes.paper}>xs</Paper>

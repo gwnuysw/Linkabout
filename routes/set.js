@@ -43,12 +43,6 @@ router.get('client/:cursetid', function (req, res, next) {
   });
 });
 
-router.get('/:cursetid', function (req, res, next) {
-  let content = ssr();
-  let rendered = template(content);
-  res.send(rendered);
-});
-
 router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {
   let puginform;
 

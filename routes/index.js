@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 let set = require('../schemas/set');
-
+let template = require('../views/Template');
+let ssr = require('../views/server/server');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   //데이터베이스를 만드는 단계
   set.find(({title: 'LinkAbout', createdBy: '이석원'}))
   .then((root)=>{
-    res.redirect('set/'+root[0]._id);
+    //res.redirect('set/'+root[0]._id);
   })
   .catch(()=>{
     let root = new set({
@@ -23,8 +24,10 @@ router.get('/', function (req, res, next) {
     root.down = [...root.down, people._id];
     people.save();
     root.save();
-    res.redirect('set/'+result._id);
   });
+  let content = ssr();
+  let rendered = template(content);
+  res.send(rendered);
 });
 
 module.exports = router;
