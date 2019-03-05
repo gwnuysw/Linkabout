@@ -77,12 +77,12 @@ function (_React$Component) {
       var _this = this;
 
       if (this.props.match.url == "/") {
-        fetch('http://localhost/set/5c7382e9ae78c74259616d6c').then(function (response) {
+        fetch('http://localhost/set/5c7e008874f7270f3190499e').then(function (response) {
           return response.json();
         }).then(function (data) {
           _this.setState(_objectSpread({}, data));
 
-          console.log(_this.state);
+          console.log('this is ajax result', _this.state);
         });
       }
 

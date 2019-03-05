@@ -100,16 +100,9 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var curset;
+      var curset; //curset = classes.informOfSet.curset[0];
 
-      if (this.props.informOfSet != null) {
-        curset = this.props.informOfSet.curset[0];
-      } else {
-        curset.title = 4;
-        curset.createBy = 5;
-      }
-
-      console.log('check curset', this.props.informOfSet);
+      console.log('this is curset', curset);
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_Grid.default, {
@@ -122,11 +115,11 @@ function (_React$Component) {
       }, _react.default.createElement("div", {
         className: classes.demo
       }, _react.default.createElement(_List.default, {
-        dense: false
+        dense: true
       }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: curset.title,
-        secondary: curset.createdBy
-      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
+        primary: "{cursetddddddddddddd.title}",
+        secondary: "{cursetdddddddddddddd.createdBy}"
+      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
     }
   }]);
 

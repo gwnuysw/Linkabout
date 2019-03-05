@@ -20,11 +20,11 @@ const styles = theme => ({
 class colContainer extends React.Component {
   componentDidMount() {
     if(this.props.match.url == "/"){
-      fetch('http://localhost/set/5c7382e9ae78c74259616d6c')
+      fetch('http://localhost/set/5c7e008874f7270f3190499e')
       .then(response=>response.json())
       .then((data)=>{
         this.setState({...data});
-        console.log(this.state);
+        console.log('this is ajax result', this.state);
       })
     }
     console.log('check url', this.props.match.url);
@@ -32,7 +32,7 @@ class colContainer extends React.Component {
   render () {
     const { classes } = this.props;
     return (
-      <div className={classes.root} >
+      <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>

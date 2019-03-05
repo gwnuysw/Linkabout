@@ -43,25 +43,27 @@ class CategoryList extends React.Component {
   render() {
     const { classes } = this.props;
     let curset;
-    if(this.props.informOfSet != null){
-      curset = this.props.informOfSet.curset[0];
-    }
-    else{
-      curset.title = 4;
-      curset.createBy = 5;
-    }
-    console.log('check curset',this.props.informOfSet);
+
+    //curset = classes.informOfSet.curset[0];
+
+    console.log('this is curset', curset);
     return (
       <div className={classes.root}>
         <Grid container spacing={16}>
           <Grid item xs={12} md={6}>
             <div className={classes.demo}>
-              <List dense={false}>
-                  <ListItem>
+              <List dense={true}>
+                  <ListItem >
                     <ListItemText
-                      primary={curset.title}
-                      secondary={curset.createdBy}
+                      primary='{cursetddddddddddddd.title}'
+                      secondary='{cursetdddddddddddddd.createdBy}'
                     />
+                  </ListItem>
+                  <ListItem >
+                    <CategoryCard />
+                  </ListItem>
+                  <ListItem>
+                    <CategoryCard />
                   </ListItem>
                   <ListItem>
                     <CategoryCard />
