@@ -80,7 +80,9 @@ function (_React$Component) {
         fetch('http://localhost/set/5c7e008874f7270f3190499e').then(function (response) {
           return response.json();
         }).then(function (data) {
-          _this.setState(_objectSpread({}, data));
+          _this.setState(_objectSpread({}, data, {
+            ajaxed: true
+          }));
 
           console.log('this is ajax result', _this.state);
         });
@@ -92,6 +94,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
+      console.log('container classes', classes);
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_Grid.default, {
@@ -103,7 +106,8 @@ function (_React$Component) {
       }, _react.default.createElement(_Paper.default, {
         className: classes.paper
       }, _react.default.createElement(_categoryList.default, {
-        informOfSet: this.state
+        informOfSet: this.state,
+        width: "100%"
       }))), _react.default.createElement(_Grid.default, {
         item: true,
         xs: 6

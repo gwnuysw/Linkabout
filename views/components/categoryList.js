@@ -100,26 +100,25 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var curset; //curset = classes.informOfSet.curset[0];
+      var title = "Category Title";
+      var createdBy = "Category Owner";
 
-      console.log('this is curset', curset);
+      if (this.props.informOfSet) {
+        title = this.props.informOfSet.curset[0].title;
+        createdBy = this.props.informOfSet.curset[0].createdBy;
+      }
+
+      console.log('this is curset', this.props);
       return _react.default.createElement("div", {
         className: classes.root
-      }, _react.default.createElement(_Grid.default, {
-        container: true,
-        spacing: 16
-      }, _react.default.createElement(_Grid.default, {
-        item: true,
-        xs: 12,
-        md: 6
       }, _react.default.createElement("div", {
         className: classes.demo
       }, _react.default.createElement(_List.default, {
         dense: true
       }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: "{cursetddddddddddddd.title}",
-        secondary: "{cursetdddddddddddddd.createdBy}"
-      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
+        primary: title,
+        secondary: createdBy
+      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))));
     }
   }]);
 

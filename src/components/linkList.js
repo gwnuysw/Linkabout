@@ -44,23 +44,19 @@ class CategoryList extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Grid container spacing={16}>
-          <Grid item xs={12} md={6}>
-            <div className={classes.demo}>
-              <List dense={false}>
-                  <ListItem>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary='Secondary text'
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <LinkCard />
-                  </ListItem>
-              </List>
-            </div>
-          </Grid>
-        </Grid>
+        <div className={classes.demo}>
+          <List dense={false}>
+            <ListItem>
+              <ListItemText
+                primary="Single-line item"
+                secondary='Secondary text'
+              />
+            </ListItem>
+            <ListItem>
+              <LinkCard />
+            </ListItem>
+          </List>
+        </div>
       </div>
     );
   }

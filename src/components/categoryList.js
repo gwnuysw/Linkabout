@@ -42,36 +42,34 @@ class CategoryList extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let curset;
-
-    //curset = classes.informOfSet.curset[0];
-
-    console.log('this is curset', curset);
+    let title = "Category Title"
+    let createdBy = "Category Owner";
+    if(this.props.informOfSet){
+      title = this.props.informOfSet.curset[0].title;
+      createdBy = this.props.informOfSet.curset[0].createdBy;
+    }
+    console.log('this is curset', this.props);
     return (
       <div className={classes.root}>
-        <Grid container spacing={16}>
-          <Grid item xs={12} md={6}>
-            <div className={classes.demo}>
-              <List dense={true}>
-                  <ListItem >
-                    <ListItemText
-                      primary='{cursetddddddddddddd.title}'
-                      secondary='{cursetdddddddddddddd.createdBy}'
-                    />
-                  </ListItem>
-                  <ListItem >
-                    <CategoryCard />
-                  </ListItem>
-                  <ListItem>
-                    <CategoryCard />
-                  </ListItem>
-                  <ListItem>
-                    <CategoryCard />
-                  </ListItem>
-              </List>
-            </div>
-          </Grid>
-        </Grid>
+        <div className={classes.demo}>
+          <List dense={true}>
+            <ListItem >
+              <ListItemText
+                primary={title}
+                secondary={createdBy}
+              />
+            </ListItem>
+            <ListItem >
+              <CategoryCard />
+            </ListItem>
+            <ListItem>
+              <CategoryCard />
+            </ListItem>
+            <ListItem>
+              <CategoryCard />
+            </ListItem>
+          </List>
+        </div>
       </div>
     );
   }
@@ -80,5 +78,4 @@ class CategoryList extends React.Component {
 CategoryList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles)(CategoryList);

@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var styles = {
   card: {
-    width: 275
+    width: '100%'
   },
   bullet: {
     display: 'inline-block',

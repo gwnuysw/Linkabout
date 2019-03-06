@@ -23,7 +23,7 @@ class colContainer extends React.Component {
       fetch('http://localhost/set/5c7e008874f7270f3190499e')
       .then(response=>response.json())
       .then((data)=>{
-        this.setState({...data});
+        this.setState({...data, ajaxed : true});
         console.log('this is ajax result', this.state);
       })
     }
@@ -31,12 +31,13 @@ class colContainer extends React.Component {
   };
   render () {
     const { classes } = this.props;
+    console.log('container classes', classes);
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryList informOfSet={this.state}/>
+              <CategoryList informOfSet={this.state} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
