@@ -104,10 +104,7 @@ function (_React$Component) {
 
       if (this.props.informOfSet != null) {
         curset = this.props.informOfSet.curset[0];
-      } else {
-        curset.title = 4;
-        curset.createBy = 5;
-      }
+      } else {}
 
       console.log('check curset', this.props.informOfSet);
       return _react.default.createElement("div", {
@@ -124,8 +121,8 @@ function (_React$Component) {
       }, _react.default.createElement(_List.default, {
         dense: false
       }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: curset.title,
-        secondary: curset.createdBy
+        primary: "title",
+        secondary: "author"
       })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
     }
   }]);

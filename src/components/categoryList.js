@@ -47,8 +47,7 @@ class CategoryList extends React.Component {
       curset = this.props.informOfSet.curset[0];
     }
     else{
-      curset.title = 4;
-      curset.createBy = 5;
+
     }
     console.log('check curset',this.props.informOfSet);
     return (
@@ -59,8 +58,8 @@ class CategoryList extends React.Component {
               <List dense={false}>
                   <ListItem>
                     <ListItemText
-                      primary={curset.title}
-                      secondary={curset.createdBy}
+                      primary="title"
+                      secondary="author"
                     />
                   </ListItem>
                   <ListItem>
