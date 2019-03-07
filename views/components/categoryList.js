@@ -76,14 +76,7 @@ var styles = function styles(theme) {
       margin: "".concat(theme.spacing.unit * 4, "px 0 ").concat(theme.spacing.unit * 2, "px")
     }
   };
-}; // function generate(element) {
-//   return [0, 1, 2].map(value =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-
+};
 
 var CategoryList =
 /*#__PURE__*/
@@ -100,25 +93,29 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var title = "Category Title";
-      var createdBy = "Category Owner";
+      var downCategory = [{
+        title: 'none',
+        createdBy: 'none'
+      }];
 
-      if (this.props.informOfSet) {
-        title = this.props.informOfSet.curset[0].title;
-        createdBy = this.props.informOfSet.curset[0].createdBy;
+      if (this.props.downCategory) {
+        downCategory = this.props.downCategory;
       }
 
-      console.log('this is curset', this.props);
+      console.log('this is down set', downCategory);
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement("div", {
         className: classes.demo
       }, _react.default.createElement(_List.default, {
         dense: true
-      }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: title,
-        secondary: createdBy
-      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))));
+      }, downCategory.map(function (value) {
+        return _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, {
+          title: value.title,
+          createdBy: value.createdBy,
+          id: value._id
+        }));
+      }))));
     }
   }]);
 

@@ -24,37 +24,37 @@ const styles = {
   },
 };
 
-function CategoryCard(props) {
-  const { classes } = props;
-  const bull = <span className={classes.bullet}>•</span>;
+class CategoryCard extends React.Component {
+  render(){
+    const { classes } = this.props;
+    let title = 'none';
+    let createdBy = 'none';
+    let id='5c7e008874f7270f3190499e';
+    if(this.props.title){
+      title = this.props.title;
+      createdBy = this.props.createdBy;
+      id = "/set/"+this.props.id;
+    }
+    console.log('check string', this.props);
+    return (
 
-  return (
-    <Card className={classes.card} >
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="h2">
-          be
-          {bull}
-          nev
-          {bull}o{bull}
-          lent
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
+          <Card className={classes.card} >
+            <CardActions>
+              <Button tag="a" href={id}>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {title}
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    {createdBy}
+                  </Typography>
+                </CardContent>
+              </Button>
+            </CardActions>
+          </Card>
+
+    );
+  }
 }
 
 CategoryCard.propTypes = {

@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { spacing } from '@material-ui/system';
-import CategoryList from './categoryList';
+import CategoryTab from './categoryTab';
 import LinkList from './linkList';
 import { Route, Link } from 'react-router-dom';
 const styles = theme => ({
@@ -37,7 +37,7 @@ class colContainer extends React.Component {
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryList informOfSet={this.state} width = '100%'/>
+              <CategoryTab informOfSet={this.state} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>

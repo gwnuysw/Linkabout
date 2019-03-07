@@ -17,7 +17,7 @@ var _Grid = _interopRequireDefault(require("@material-ui/core/Grid"));
 
 var _system = require("@material-ui/system");
 
-var _categoryList = _interopRequireDefault(require("./categoryList"));
+var _categoryTab = _interopRequireDefault(require("./categoryTab"));
 
 var _linkList = _interopRequireDefault(require("./linkList"));
 
@@ -105,7 +105,7 @@ function (_React$Component) {
         xs: true
       }, _react.default.createElement(_Paper.default, {
         className: classes.paper
-      }, _react.default.createElement(_categoryList.default, {
+      }, _react.default.createElement(_categoryTab.default, {
         informOfSet: this.state,
         width: "100%"
       }))), _react.default.createElement(_Grid.default, {

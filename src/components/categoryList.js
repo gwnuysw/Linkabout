@@ -30,44 +30,27 @@ const styles = theme => ({
   },
 });
 
-// function generate(element) {
-//   return [0, 1, 2].map(value =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-
 class CategoryList extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let title = "Category Title"
-    let createdBy = "Category Owner";
-    if(this.props.informOfSet){
-      title = this.props.informOfSet.curset[0].title;
-      createdBy = this.props.informOfSet.curset[0].createdBy;
+    let downCategory = [{
+      title : 'none',
+      createdBy : 'none'
+    }];
+    if(this.props.downCategory){
+      downCategory = this.props.downCategory;
     }
-    console.log('this is curset', this.props);
+    console.log('this is down set', downCategory);
     return (
       <div className={classes.root}>
         <div className={classes.demo}>
           <List dense={true}>
-            <ListItem >
-              <ListItemText
-                primary={title}
-                secondary={createdBy}
-              />
-            </ListItem>
-            <ListItem >
-              <CategoryCard />
-            </ListItem>
-            <ListItem>
-              <CategoryCard />
-            </ListItem>
-            <ListItem>
-              <CategoryCard />
-            </ListItem>
+            {downCategory.map(value=>(
+              <ListItem >
+                <CategoryCard title={value.title} createdBy={value.createdBy} id={value._id}/>
+              </ListItem>
+            ))}
           </List>
         </div>
       </div>
