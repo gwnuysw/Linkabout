@@ -40,7 +40,7 @@ class categoryTab extends React.Component {
     let title = "Category Title"
     let createdBy = "Category Owner";
     let downset = {};
-    if(this.props.informOfSet){
+    if(this.props.informOfSet.curset){
       title = this.props.informOfSet.curset[0].title;
       createdBy = this.props.informOfSet.curset[0].createdBy;
       downset = this.props.informOfSet.downset;
@@ -66,7 +66,7 @@ class categoryTab extends React.Component {
           </TabContainer>}
         {value === 1 &&
           <TabContainer>
-            <CategoryList downCategory={downset}/>
+            <CategoryList downCategory={downset} change={this.props.change}/>
           </TabContainer>}
       </div>
     );

@@ -105,7 +105,7 @@ function (_React$Component) {
       var createdBy = "Category Owner";
       var downset = {};
 
-      if (this.props.informOfSet) {
+      if (this.props.informOfSet.curset) {
         title = this.props.informOfSet.curset[0].title;
         createdBy = this.props.informOfSet.curset[0].createdBy;
         downset = this.props.informOfSet.downset;

@@ -34,13 +34,15 @@ class CategoryCard extends React.Component {
       title = this.props.title;
       createdBy = this.props.createdBy;
       id = "/set/"+this.props.id;
+      this.setState({
+
+      })
     }
     console.log('check string', this.props);
     return (
-
           <Card className={classes.card} >
             <CardActions>
-              <Button tag="a" href={id}>
+              <Button tag="a" href={id} onclick=>
                 <CardContent>
                   <Typography variant="h5" component="h2">
                     {title}
@@ -52,7 +54,6 @@ class CategoryCard extends React.Component {
               </Button>
             </CardActions>
           </Card>
-
     );
   }
 }

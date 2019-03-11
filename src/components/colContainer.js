@@ -18,9 +18,21 @@ const styles = theme => ({
   },
 });
 class colContainer extends React.Component {
+  state = {
+    categoryId : '5c7e008874f7270f3190499e',
+  };
+  changeCategory(){
+
+    fetch('http://localhost/set/'+setId)
+    .then(response=>response.json())
+    .then((data)=>{
+      this.setState({...data, ajaxed : true});
+      console.log('this is ajax result', this.state);
+    })
+  };
   componentDidMount() {
     if(this.props.match.url == "/"){
-      fetch('http://localhost/set/5c7e008874f7270f3190499e')
+      fetch('http://localhost/set/'+this.state.categoryId)
       .then(response=>response.json())
       .then((data)=>{
         this.setState({...data, ajaxed : true});
@@ -37,7 +49,7 @@ class colContainer extends React.Component {
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryTab informOfSet={this.state} width = '100%'/>
+              <CategoryTab informOfSet={this.state} change={this.changeCategory} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
