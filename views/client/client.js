@@ -78,11 +78,13 @@ var theme = (0, _styles.createMuiTheme)({
     useNextVariants: true
   }
 }); // Create a new class name generator.
-
-var generateClassName = (0, _styles.createGenerateClassName)();
-
-_reactDom.default.hydrate(_react.default.createElement(_JssProvider.default, {
-  generateClassName: generateClassName
-}, _react.default.createElement(_styles.MuiThemeProvider, {
-  theme: theme
-}, _react.default.createElement(Main, null))), document.getElementById('root'));
+// const generateClassName = createGenerateClassName();
+//
+// ReactDOM.hydrate(
+//   <JssProvider generateClassName={generateClassName}>
+//     <MuiThemeProvider theme={theme}>
+//       <Main />
+//     </MuiThemeProvider>
+//   </JssProvider>,
+//   document.getElementById('root')
+// );

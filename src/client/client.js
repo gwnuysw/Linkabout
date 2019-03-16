@@ -39,13 +39,13 @@ const theme = createMuiTheme({
 });
 
 // Create a new class name generator.
-const generateClassName = createGenerateClassName();
-
-ReactDOM.hydrate(
-  <JssProvider generateClassName={generateClassName}>
-    <MuiThemeProvider theme={theme}>
-      <Main />
-    </MuiThemeProvider>
-  </JssProvider>,
-  document.getElementById('root')
-);
+// const generateClassName = createGenerateClassName();
+//
+// ReactDOM.hydrate(
+//   <JssProvider generateClassName={generateClassName}>
+//     <MuiThemeProvider theme={theme}>
+//       <Main />
+//     </MuiThemeProvider>
+//   </JssProvider>,
+//   document.getElementById('root')
+// );

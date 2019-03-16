@@ -7,6 +7,7 @@ import { spacing } from '@material-ui/system';
 import CategoryTab from './categoryTab';
 import LinkList from './linkList';
 import { Route, Link } from 'react-router-dom';
+import fetch from 'fetch-everywhere';
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -21,26 +22,16 @@ class colContainer extends React.Component {
   state = {
     categoryId : '5c7e008874f7270f3190499e',
   };
-  changeCategory(){
-
-    fetch('http://localhost/set/'+setId)
+  constructor(props){
+    super(props);
+    fetch('http://localhost/set/data/'+this.props.match.params.categoryId)
     .then(response=>response.json())
     .then((data)=>{
       this.setState({...data, ajaxed : true});
       console.log('this is ajax result', this.state);
     })
-  };
-  componentDidMount() {
-    if(this.props.match.url == "/"){
-      fetch('http://localhost/set/'+this.state.categoryId)
-      .then(response=>response.json())
-      .then((data)=>{
-        this.setState({...data, ajaxed : true});
-        console.log('this is ajax result', this.state);
-      })
-    }
     console.log('check url', this.props.match.url);
-  };
+  }
   render () {
     const { classes } = this.props;
     console.log('container classes', classes);

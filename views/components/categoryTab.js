@@ -130,7 +130,8 @@ function (_React$Component) {
       }), _react.default.createElement(_Tab.default, {
         label: "Down"
       }))), value === 0 && _react.default.createElement(TabContainer, null, _react.default.createElement(_categoryList.default, null)), value === 1 && _react.default.createElement(TabContainer, null, _react.default.createElement(_categoryList.default, {
-        downCategory: downset
+        downCategory: downset,
+        change: this.props.change
       })));
     }
   }]);

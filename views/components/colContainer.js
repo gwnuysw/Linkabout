@@ -23,6 +23,8 @@ var _linkList = _interopRequireDefault(require("./linkList"));
 
 var _reactRouterDom = require("react-router-dom");
 
+var _fetchEverywhere = _interopRequireDefault(require("fetch-everywhere"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -65,49 +67,31 @@ var colContainer =
 function (_React$Component) {
   _inherits(colContainer, _React$Component);
 
-  function colContainer() {
-    var _getPrototypeOf2;
-
+  function colContainer(props) {
     var _this;
 
     _classCallCheck(this, colContainer);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(colContainer)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(colContainer).call(this, props));
 
     _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
       categoryId: '5c7e008874f7270f3190499e'
     });
 
+    (0, _fetchEverywhere.default)('http://localhost/set/data/' + _this.props.match.params.categoryId).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      _this.setState(_objectSpread({}, data, {
+        ajaxed: true
+      }));
+
+      console.log('this is ajax result', _this.state);
+    });
+    console.log('check url', _this.props.match.url);
     return _this;
   }
 
   _createClass(colContainer, [{
-    key: "changeCategory",
-    value: function changeCategory() {}
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      if (this.props.match.url == "/") {
-        fetch('http://localhost/set/' + this.state.categoryId).then(function (response) {
-          return response.json();
-        }).then(function (data) {
-          _this2.setState(_objectSpread({}, data, {
-            ajaxed: true
-          }));
-
-          console.log('this is ajax result', _this2.state);
-        });
-      }
-
-      console.log('check url', this.props.match.url);
-    }
-  }, {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
@@ -124,6 +108,7 @@ function (_React$Component) {
         className: classes.paper
       }, _react.default.createElement(_categoryTab.default, {
         informOfSet: this.state,
+        change: this.changeCategory,
         width: "100%"
       }))), _react.default.createElement(_Grid.default, {
         item: true,
