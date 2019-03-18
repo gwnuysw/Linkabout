@@ -22,8 +22,7 @@ class colContainer extends React.Component {
     categoryId : '5c7e008874f7270f3190499e',
   };
   changeCategory(){
-
-    fetch('http://localhost/set/'+setId)
+    fetch('http://localhost/set/'+categoryId)
     .then(response=>response.json())
     .then((data)=>{
       this.setState({...data, ajaxed : true});

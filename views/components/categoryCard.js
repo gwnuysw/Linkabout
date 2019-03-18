@@ -81,6 +81,7 @@ function (_React$Component) {
         title = this.props.title;
         createdBy = this.props.createdBy;
         id = "/set/" + this.props.id;
+        this.setState({});
       }
 
       console.log('check string', this.props);
