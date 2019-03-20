@@ -80,6 +80,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var isSignin = this.state.isSignin;
+      console.log('this is server side information', this.props);
       var navBar;
 
       if (isSignin) {
@@ -91,7 +92,7 @@ function (_React$Component) {
       }
 
       return _react.default.createElement("div", null, navBar, _react.default.createElement(_reactRouterDom.Route, {
-        path: "/",
+        path: "/set/:categoryid",
         component: _colContainer.default
       }));
     }

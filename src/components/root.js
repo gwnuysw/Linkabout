@@ -18,7 +18,7 @@ export default class Root extends React.Component {
   }
   render(){
     const isSignin = this.state.isSignin;
-
+    console.log('this is server side information',this.props);
     let navBar;
     if (isSignin) {
       navBar = <SigninedNavbar userName={this.state.userName}/>;
@@ -28,7 +28,7 @@ export default class Root extends React.Component {
     return(
       <div>
         {navBar}
-          <Route path="/" component={ColContainer} />
+        <Route path="/set/:categoryid" component={ColContainer} />
       </div>
     );
   }

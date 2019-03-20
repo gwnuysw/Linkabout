@@ -9,7 +9,7 @@ let template = require('../views/Template');
 let ssr = require('../views/server/server');
 
 //응답해줘야 하는 것들 현재셋의 정보, 현재셋과 연결된 셋들, 현재셋의 다큐먼트 링크들. 현재 써져 있는 것들은 다 버려야 할지도 모른다.
-router.get('/:cursetid', function (req, res, next) {
+router.get('/data/:cursetid', function (req, res, next) {
   let inform;
   Promise.all([
       //상위 카테고리를 검색한다.
@@ -43,6 +43,11 @@ router.get('/:cursetid', function (req, res, next) {
     console.log('inform', inform);
     res.send(JSON.stringify(inform));
   });
+});
+router.get('/:categoryid', function(req, res, next){
+  let content = ssr();
+  let rendered = template(content);
+  res.send(rendered);
 });
 router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {
   let puginform;
