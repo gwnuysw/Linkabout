@@ -7,6 +7,7 @@ import { spacing } from '@material-ui/system';
 import CategoryTab from './categoryTab';
 import LinkList from './linkList';
 import { Route, Link } from 'react-router-dom';
+import axios from 'axios';
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -23,12 +24,10 @@ class colContainer extends React.Component {
   };
   constructor(props){
     super(props);
-    fetch('http://localhost:3000/set/data/'+this.props.match.params.categoryid, {
-      headers : new Headers({
-        mode : 'no-cors'
-      })
+    axios.get('http://localhost:3000/set/data/'+this.props.match.params.categoryid)
+    .then(function(response){
+      return response.data;
     })
-    .then(response=>response.json())
     .then((data)=>{
       this.setState({...data, ajaxed : true});
       console.log('this is ajax result', this.state);

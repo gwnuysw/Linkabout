@@ -3,15 +3,17 @@ import { Route, Link } from 'react-router-dom';
 import SigninedNavbar from './signinedNavbar';
 import SignoutedNavbar from './signoutedNavbar';
 import ColContainer from './colContainer';
-
+import axios from 'axios';
 export default class Root extends React.Component {
   state = {
     isSignin : false
   }
   componentDidMount() {
     console.log('this is information', this.props.setInform);
-    fetch('http://localhost:3000/auth/signcheck')
-      .then(response => response.json())
+    axios.get('http://localhost:3000/auth/signcheck')
+      .then(function(response){
+        return response.data;
+      })
       .then((data) => {
         this.setState({...data});
       });
