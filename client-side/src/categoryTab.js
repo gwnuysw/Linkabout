@@ -39,13 +39,15 @@ class categoryTab extends React.Component {
     const { value } = this.state;
     let title = "Category Title"
     let createdBy = "Category Owner";
-    let downset = {};
+    let downset = [];
+    let upset = [];
     if(this.props.informOfSet.curset){
       title = this.props.informOfSet.curset[0].title;
       createdBy = this.props.informOfSet.curset[0].createdBy;
       downset = this.props.informOfSet.downset;
+      upset = this.props.informOfSet.upset;
     }
-    console.log('this is curset', this.props);
+    console.log('this is curset', this.props.informOfSet.downset);
     return (
       <div className={classes.root}>
         <Typography variant="h5" component="h2"  gutterBottom>
@@ -62,11 +64,11 @@ class categoryTab extends React.Component {
         </AppBar>
         {value === 0 &&
           <TabContainer>
-            <CategoryList />
+            <CategoryList category={upset}/>
           </TabContainer>}
         {value === 1 &&
           <TabContainer>
-            <CategoryList downCategory={downset} change={this.props.change}/>
+            <CategoryList category={downset}/>
           </TabContainer>}
       </div>
     );

@@ -34,19 +34,20 @@ class CategoryList extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let downCategory = [{
+    let category = [{
       title : 'none',
       createdBy : 'none'
     }];
-    if(this.props.downCategory){
-      downCategory = this.props.downCategory;
+    
+    if(this.props.category){
+      category = this.props.category;
     }
-    console.log('this is down set', downCategory);
+    console.log('this is down set', this.props.category);
     return (
       <div className={classes.root}>
         <div className={classes.demo}>
           <List dense={true}>
-            {downCategory.map(value=>(
+            {category.map(value=>(
               <ListItem >
                 <CategoryCard title={value.title} createdBy={value.createdBy} id={value._id}/>
               </ListItem>

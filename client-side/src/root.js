@@ -12,10 +12,10 @@ export default class Root extends React.Component {
     console.log('this is information', this.props.setInform);
     axios.get('http://localhost:3000/auth/signcheck')
       .then(function(response){
-        return response.data;
+        this.setState({...response.data});
       })
-      .then((data) => {
-        this.setState({...data});
+      .catch(function(reason){
+        console.log(reason);
       });
   }
   render(){

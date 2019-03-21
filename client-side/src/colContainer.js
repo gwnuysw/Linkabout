@@ -25,13 +25,11 @@ class colContainer extends React.Component {
   constructor(props){
     super(props);
     axios.get('http://localhost:3000/set/data/'+this.props.match.params.categoryid)
-    .then(function(response){
+    .then((response)=>{
+      this.setState({...response.data, ajaxed : true});
+      console.log('this is response__________',this.state);
       return response.data;
-    })
-    .then((data)=>{
-      this.setState({...data, ajaxed : true});
-      console.log('this is ajax result', this.state);
-    })
+    });
     console.log('check url', this.props.match.url);
   }
   render () {
@@ -42,7 +40,7 @@ class colContainer extends React.Component {
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryTab informOfSet={this.state} change={this.changeCategory} width = '100%'/>
+              <CategoryTab informOfSet={this.state} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
