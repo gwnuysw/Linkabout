@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import axios from 'axios';
 const styles = {
   root: {
     flexGrow: 1,
@@ -21,23 +21,32 @@ const styles = {
   },
 };
 
-function SignoutedNavbar (props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            LinkAbout
-          </Typography>
-          <Button tag="a"  href="localhost:3000/auth/google" color="inherit">Login with google</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class SignoutedNavbar extends Component{
+  loginRequest = () => {
+    axios.get('http://localhost:3000/auth/google')
+    .then(function(){
+      
+    })
+  }
+  render(){
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+              LinkAbout
+            </Typography>
+            <Button tag="Button"  color="inherit">Login with google</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 SignoutedNavbar.propTypes = {
