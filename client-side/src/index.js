@@ -24,7 +24,7 @@ class Main extends React.Component {
   render() {
     return(
       <BrowserRouter>
-        <Root />
+        <Route path="/set/:categoryid" component={Root} />
       </BrowserRouter>
     );
   }

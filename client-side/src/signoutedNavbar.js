@@ -22,12 +22,7 @@ const styles = {
 };
 
 class SignoutedNavbar extends Component{
-  loginRequest = () => {
-    axios.get('http://localhost:3000/auth/google')
-    .then(function(){
-      
-    })
-  }
+
   render(){
     const { classes } = this.props;
 
@@ -39,9 +34,9 @@ class SignoutedNavbar extends Component{
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              LinkAbout
+              LinkA
             </Typography>
-            <Button tag="Button"  color="inherit">Login with google</Button>
+            <Button tag="Button"  color="inherit" onClick={this.loginRequest}>Login with google</Button>
           </Toolbar>
         </AppBar>
       </div>

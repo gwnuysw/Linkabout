@@ -8,29 +8,38 @@ export default class Root extends React.Component {
   state = {
     isSignin : false
   }
-  componentDidMount() {
-    console.log('this is information', this.props.setInform);
-    axios.get('http://localhost:3000/auth/signcheck')
+  loginRequest = () => {
+    axios.get('http://localhost:3000/auth/google')
     .then(function(response){
-      this.setState({...response.data});
+      console.log('I wanna log in!! from root',response);
     })
-    .catch(function(reason){
-      console.log(reason);
-    });
+  }
+
+  componentDidMount() {
+    console.log('this is componentDidMount');
+    axios.all([
+      axios.get('http://localhost:3000/auth/signcheck'),
+      axios.get('http://localhost:3000/set/data/'+this.props.match.params.categoryid)
+    ])
+    .then(axios.spread((loged, set)=>{
+      console.log('this is set data from', set.data);
+      this.setState({ set : set.data});
+    }));
   }
   render(){
     const isSignin = this.state.isSignin;
-    console.log('this is server side information',this.props);
+    console.log('this is render');
+    console.log('this is server side information from root',this.props);
     let navBar;
     if (isSignin) {
       navBar = <SigninedNavbar userName={this.state.userName}/>;
     } else {
-      navBar = <SignoutedNavbar />;
+      navBar = <SignoutedNavbar loginRequest={this.loginRequest}/>;
     }
     return(
       <div>
         {navBar}
-        <Route path="/set/:categoryid" component={ColContainer} />
+        <ColContainer informOfSet={this.state.set}/>
       </div>
     );
   }

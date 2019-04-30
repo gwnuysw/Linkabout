@@ -20,7 +20,6 @@ router.get('/kakao/callback', passport.authenticate('kakao',{
 router.get('/google', passport.authenticate('google', { scope: [
                 'https://www.googleapis.com/auth/plus.login',
                 'https://www.googleapis.com/auth/userinfo.email'] }));
-
 // GET /auth/google/callback
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  If authentication fails, the user will be redirected back to the
@@ -29,7 +28,8 @@ router.get('/google', passport.authenticate('google', { scope: [
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    console.log(req.isAuthenticated());
+    res.send(req.isAuthenticated());
   }
 );
 router.get('/signcheck', function(req, res, next){
@@ -37,14 +37,15 @@ router.get('/signcheck', function(req, res, next){
   if(req.isAuthenticated()){
     data.isSignin = true;
     data.userName = req.user.nick;
-    console.log('looooooooooooged?',JSON.stringify(data));
+    console.log('authed true : ',JSON.stringify(data));
     res.send(JSON.stringify(data));
   }
   else{
     data.isSignin = false;
-    console.log('looooooooooooged?',JSON.stringify(data));
+    console.log('authed fail : ',JSON.stringify(data));
     res.send(JSON.stringify(data));
   }
+  console.log('looooooooooooged?',JSON.stringify(data));
 });
 router.get('/signout', isLoggedIn, function(req, res, next) {
   req.logout();

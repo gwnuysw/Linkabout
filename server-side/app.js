@@ -21,7 +21,7 @@ const userlink = require('./routes/userlink')
 const passportConfig = require('./passport');
 
 require('dotenv').config();
-//몽고 데이터베이스 접속
+//몽고 데이터베이스 접속 mongodb connect
 const connect = require('./schemas');
 connect();
 
@@ -71,6 +71,7 @@ app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+
 app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());

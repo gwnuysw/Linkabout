@@ -19,28 +19,19 @@ const styles = theme => ({
   },
 });
 class colContainer extends React.Component {
-  state = {
-    categoryId : '5c7e008874f7270f3190499e',
-  };
-  constructor(props){
-    super(props);
-    axios.get('http://localhost:3000/set/data/'+this.props.match.params.categoryid)
-    .then((response)=>{
-      this.setState({...response.data, ajaxed : true});
-      console.log('this is response__________',this.state);
-      return response.data;
-    });
-    console.log('check url', this.props.match.url);
+
+  componentDidMount(){
+      console.log('this is doesn\'t work');
   }
   render () {
     const { classes } = this.props;
-    console.log('container classes', classes);
+    console.log('this is doesn\'t work');  
     return (
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryTab informOfSet={this.state} width = '100%'/>
+              <CategoryTab informOfSet={this.props.informOfSet} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
