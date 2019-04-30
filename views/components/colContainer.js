@@ -87,21 +87,33 @@ function (_React$Component) {
 
   _createClass(colContainer, [{
     key: "changeCategory",
-    value: function changeCategory() {}
+    value: function changeCategory() {
+      var _this2 = this;
+
+      fetch('http://localhost/set/' + setId).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        _this2.setState(_objectSpread({}, data, {
+          ajaxed: true
+        }));
+
+        console.log('this is ajax result', _this2.state);
+      });
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.props.match.url == "/") {
         fetch('http://localhost/set/' + this.state.categoryId).then(function (response) {
           return response.json();
         }).then(function (data) {
-          _this2.setState(_objectSpread({}, data, {
+          _this3.setState(_objectSpread({}, data, {
             ajaxed: true
           }));
 
-          console.log('this is ajax result', _this2.state);
+          console.log('this is ajax result', _this3.state);
         });
       }
 
@@ -124,6 +136,7 @@ function (_React$Component) {
         className: classes.paper
       }, _react.default.createElement(_categoryTab.default, {
         informOfSet: this.state,
+        change: this.changeCategory,
         width: "100%"
       }))), _react.default.createElement(_Grid.default, {
         item: true,

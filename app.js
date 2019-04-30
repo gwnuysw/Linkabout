@@ -1,4 +1,5 @@
 const createError = require('http-errors');
+const ReactEngine = require('react-engine');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -28,10 +29,26 @@ connect();
 passportConfig(passport);
 
 const app = express();
+// create an engine instance
+var engine = ReactEngine.server.create({
+  /*
+    see the complete server options spec here:
+    https://github.com/paypal/react-engine#server-options-spec
+  */
+});
+// set the engine
+app.engine('.jsx', engine);
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// set the view directory
+app.set('views', __dirname + '/views');
+
+// set jsx or js as the view engine
+// (without this you would need to supply the extension to res.render())
+// ex: res.render('index.jsx') instead of just res.render('index').
+app.set('view engine', 'jsx');
+
+// finally, set the custom view
+app.set('view', require('react-engine/lib/expressView'));
 
 if(process.env.NODE_ENV === 'production'){
   app.use(morgan('combined'));
