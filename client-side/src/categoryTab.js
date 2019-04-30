@@ -41,13 +41,14 @@ class categoryTab extends React.Component {
     let createdBy = "Category Owner";
     let downset = [];
     let upset = [];
-    if(this.props.informOfSet.curset){
-      title = this.props.informOfSet.curset[0].title;
-      createdBy = this.props.informOfSet.curset[0].createdBy;
-      downset = this.props.informOfSet.downset;
-      upset = this.props.informOfSet.upset;
-    }
-    console.log('this is curset', this.props.informOfSet.downset);
+    console.log('this is curset', this.props);
+    // if(this.props.informOfSet.curset){
+    //   title = this.props.informOfSet.curset[0].title;
+    //   createdBy = this.props.informOfSet.curset[0].createdBy;
+    //   downset = this.props.informOfSet.downset;
+    //   upset = this.props.informOfSet.upset;
+    // }
+
     return (
       <div className={classes.root}>
         <Typography variant="h5" component="h2"  gutterBottom>
