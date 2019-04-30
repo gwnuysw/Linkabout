@@ -42,7 +42,7 @@ class CategoryCard extends React.Component {
     return (
           <Card className={classes.card} >
             <CardActions>
-              <Button tag="a" href={id} onclick=>
+              <Button tag="a" href={id}>
                 <CardContent>
                   <Typography variant="h5" component="h2">
                     {title}
