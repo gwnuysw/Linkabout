@@ -30,6 +30,7 @@ router.get('/:cursetid', function (req, res, next) {
     //for var in array 방법을 쓰면 배열의 원소가 아니라 프로퍼티들이 쫘악 출력된다;;;
     //map을 써도 안됀다. map(callback)형태인데 callback 자체가 비동기로 실행되어 하위 then 실행후 콜백이 실행된다;;;
     //for of 를 시도해 본다. then 함수에 asyn를 붙이고 pormise에 await붙이니 해결했다.
+    console.log('this is down', curset);
     for(let downId of curset[0].down){
         await set.find({_id: downId})
         .then((downset)=>{
@@ -39,13 +40,12 @@ router.get('/:cursetid', function (req, res, next) {
     return ;
   })
   .then((result)=>{
+    console.log('inform', inform);
     res.send(JSON.stringify(inform));
   });
 });
-
 router.get('/newsetform/:cursetid', isLoggedIn, function (req, res, next) {
   let puginform;
-
   set.find({_id: req.params.cursetid})
   .then((curset) => {
     puginform = {

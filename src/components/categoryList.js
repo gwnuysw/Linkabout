@@ -30,45 +30,29 @@ const styles = theme => ({
   },
 });
 
-// function generate(element) {
-//   return [0, 1, 2].map(value =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-
 class CategoryList extends React.Component {
 
   render() {
     const { classes } = this.props;
-    let curset;
-    if(this.props.informOfSet != null){
-      curset = this.props.informOfSet.curset[0];
+    let downCategory = [{
+      title : 'none',
+      createdBy : 'none'
+    }];
+    if(this.props.downCategory){
+      downCategory = this.props.downCategory;
     }
-    else{
-
-    }
-    console.log('check curset',this.props.informOfSet);
+    console.log('this is down set', downCategory);
     return (
       <div className={classes.root}>
-        <Grid container spacing={16}>
-          <Grid item xs={12} md={6}>
-            <div className={classes.demo}>
-              <List dense={false}>
-                  <ListItem>
-                    <ListItemText
-                      primary="title"
-                      secondary="author"
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <CategoryCard />
-                  </ListItem>
-              </List>
-            </div>
-          </Grid>
-        </Grid>
+        <div className={classes.demo}>
+          <List dense={true}>
+            {downCategory.map(value=>(
+              <ListItem >
+                <CategoryCard title={value.title} createdBy={value.createdBy} id={value._id}/>
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </div>
     );
   }
@@ -77,5 +61,4 @@ class CategoryList extends React.Component {
 CategoryList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles)(CategoryList);

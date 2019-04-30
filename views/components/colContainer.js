@@ -17,7 +17,7 @@ var _Grid = _interopRequireDefault(require("@material-ui/core/Grid"));
 
 var _system = require("@material-ui/system");
 
-var _categoryList = _interopRequireDefault(require("./categoryList"));
+var _categoryTab = _interopRequireDefault(require("./categoryTab"));
 
 var _linkList = _interopRequireDefault(require("./linkList"));
 
@@ -77,12 +77,15 @@ function (_React$Component) {
       var _this = this;
 
       if (this.props.match.url == "/") {
+        //fetch('http://localhost/set/5c7e008874f7270f3190499e')
         fetch('http://localhost/set/5c7382e9ae78c74259616d6c').then(function (response) {
           return response.json();
         }).then(function (data) {
-          _this.setState(_objectSpread({}, data));
+          _this.setState(_objectSpread({}, data, {
+            ajaxed: true
+          }));
 
-          console.log(_this.state);
+          console.log('this is ajax result', _this.state);
         });
       }
 
@@ -92,6 +95,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
+      console.log('container classes', classes);
       return _react.default.createElement("div", {
         className: classes.root
       }, _react.default.createElement(_Grid.default, {
@@ -102,8 +106,9 @@ function (_React$Component) {
         xs: true
       }, _react.default.createElement(_Paper.default, {
         className: classes.paper
-      }, _react.default.createElement(_categoryList.default, {
-        informOfSet: this.state
+      }, _react.default.createElement(_categoryTab.default, {
+        informOfSet: this.state,
+        width: "100%"
       }))), _react.default.createElement(_Grid.default, {
         item: true,
         xs: 6

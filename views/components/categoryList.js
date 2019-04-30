@@ -76,14 +76,7 @@ var styles = function styles(theme) {
       margin: "".concat(theme.spacing.unit * 4, "px 0 ").concat(theme.spacing.unit * 2, "px")
     }
   };
-}; // function generate(element) {
-//   return [0, 1, 2].map(value =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-
+};
 
 var CategoryList =
 /*#__PURE__*/
@@ -100,30 +93,29 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var classes = this.props.classes;
-      var curset;
+      var downCategory = [{
+        title: 'none',
+        createdBy: 'none'
+      }];
 
-      if (this.props.informOfSet != null) {
-        curset = this.props.informOfSet.curset[0];
-      } else {}
+      if (this.props.downCategory) {
+        downCategory = this.props.downCategory;
+      }
 
-      console.log('check curset', this.props.informOfSet);
+      console.log('this is down set', downCategory);
       return _react.default.createElement("div", {
         className: classes.root
-      }, _react.default.createElement(_Grid.default, {
-        container: true,
-        spacing: 16
-      }, _react.default.createElement(_Grid.default, {
-        item: true,
-        xs: 12,
-        md: 6
       }, _react.default.createElement("div", {
         className: classes.demo
       }, _react.default.createElement(_List.default, {
-        dense: false
-      }, _react.default.createElement(_ListItem.default, null, _react.default.createElement(_ListItemText.default, {
-        primary: "title",
-        secondary: "author"
-      })), _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, null)))))));
+        dense: true
+      }, downCategory.map(function (value) {
+        return _react.default.createElement(_ListItem.default, null, _react.default.createElement(_categoryCard.default, {
+          title: value.title,
+          createdBy: value.createdBy,
+          id: value._id
+        }));
+      }))));
     }
   }]);
 

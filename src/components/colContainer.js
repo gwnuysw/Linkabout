@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { spacing } from '@material-ui/system';
-import CategoryList from './categoryList';
+import CategoryTab from './categoryTab';
 import LinkList from './linkList';
 import { Route, Link } from 'react-router-dom';
 const styles = theme => ({
@@ -20,23 +20,25 @@ const styles = theme => ({
 class colContainer extends React.Component {
   componentDidMount() {
     if(this.props.match.url == "/"){
+      //fetch('http://localhost/set/5c7e008874f7270f3190499e')
       fetch('http://localhost/set/5c7382e9ae78c74259616d6c')
       .then(response=>response.json())
       .then((data)=>{
-        this.setState({...data});
-        console.log(this.state);
+        this.setState({...data, ajaxed : true});
+        console.log('this is ajax result', this.state);
       })
     }
     console.log('check url', this.props.match.url);
   };
   render () {
     const { classes } = this.props;
+    console.log('container classes', classes);
     return (
-      <div className={classes.root} >
+      <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs>
             <Paper className={classes.paper}>
-              <CategoryList informOfSet={this.state}/>
+              <CategoryTab informOfSet={this.state} width = '100%'/>
             </Paper>
           </Grid>
           <Grid item xs={6}>
