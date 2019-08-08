@@ -1,0 +1,40 @@
+extends header
+
+block MainView
+
+  div(class="w3-sidebar w3-bar-block w3-black w3-card" style="width:130px")
+    h5(class="w3-bar-item") Categories
+    if children.length == 0
+      div 카테고리가 없습니다. 첫 카테고리를 만들어 주세요!
+    if userid === undefined
+      each child in children
+        button(class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Zoom')")
+          a(href="/set/"+child._id)= child.title
+    else
+      each child in children
+        button(class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Zoom')") Zoom
+          a(href="/userset/"+child._id+"/"+userid)= child.title
+  div(style="margin-left:130px")
+    div(id="Zoom" class="w3-container city w3-animate-zoom")
+      if links.length == 0
+        li link가 없습니다. 첫 link를 만들어 주세요!
+      if userid === undefined
+        each link in links
+          div(class="content" style="border-bottom:5px solid; border-left:1px groove; border-right:1px groove; padding:10px;")
+            h3= link.title
+            a(href=link.link style="color:blue;")= link.link
+            p(style="color: gray;") Orignal author : #{link.author}
+            div(style=" border-top: 1px dashed;")
+              p(style="margin-bottom: 0px;")= link.createdBy
+              p(style="font-size: 0.7em; margin-top: 1px;") 게시일 : #{link.createAt}
+              p(style="font-size: 0.8em")= link.text
+      else
+        each link in links
+          div(class="content" style="border-bottom:5px solid; border-left:1px groove; border-right:1px groove; padding:10px;")
+            h3= link.title
+            a(href=link.link style="color:blue;")= link.link
+            p(style="color: gray;") Orignal author : #{link.author}
+            div(style=" border-top: 1px dashed;")
+              p(style="margin-bottom: 0px;")= link.createdBy
+              p(style="font-size: 0.7em; margin-top: 1px;") 게시일 : #{link.createAt}
+              p(style="font-size: 0.8em")= link.text

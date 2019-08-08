@@ -1,0 +1,38 @@
+doctype Html
+html
+head
+  title LinkAbout
+  link(rel="stylesheet" href="/stylesheets/main.css")
+  link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
+  body
+    header
+      ul(class="horizen-menu-left")
+        if uppersettitle === undefined
+        else
+          li
+            if userid === undefined
+              a(href="/set/"+uppersetid) #{uppersettitle}
+            else if uppersettitle == "LinkAbout"
+              a(href="/set/"+uppersetid) #{uppersettitle}
+            else
+              a(href="/userset/"+uppersetid+"/"+userid) #{uppersettitle}
+        li
+          a(href="/set/newsetform/"+curset._id) New Category
+          li
+            a(href="/link/newlinkform/"+curset._id) New Link
+        if isAuthed
+          li
+            a(href="/auth/logout") Logout
+          li
+            a(href="/user/"+loginid) MyPage
+        else
+          li
+            a(href="/auth/loginpage") SignIn
+        li
+          a(href="/user/find/user") Find Users
+
+      if userid === undefined
+        h1(class="title")= curset.title
+      else
+        h1(class="title")= curset.title
+    block MainView
