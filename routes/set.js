@@ -4,21 +4,24 @@ let express = require('express');
 let router = express.Router();
 let set = require('../schemas/set');
 let user = require('../schemas/user');
+let link = require('../schemas/link');
 
 router.get('/:cursetid', function (req, res, next) {
   let puginform;
 
   Promise.all([
       set.find({ancestor: req.params.cursetid, personal : null}),
-      set.find({_id: req.params.cursetid})
+      set.find({_id: req.params.cursetid}),
+      link.find({belong : req.params.cursetid, linktype : 'document'})
   ])
-  .then(([children, curset]) => {
+  .then(([children, curset, links]) => {
     console.log('??', curset);
     console.log('사용자', curset[0])
     puginform = {
       isAuthed : req.isAuthenticated(),
       children : children,
       curset : curset[0],
+      links : links
     }
     if(req.isAuthenticated()){ //현재 로그인 사용자와 프로필 주인을 구별하기위함 mypage접속을 위해 필요
       puginform.loginid = req.user._id;
@@ -26,11 +29,13 @@ router.get('/:cursetid', function (req, res, next) {
     if(curset[0].ancestor === "undefined"){//부모가 없다는 것은 최상위 개체 LinkAbout이라는 것
       puginform.uppersetid = curset[0]._id;
       puginform.uppersettitle = curset[0].title;
+      console.log('curset puginform', puginform);
       res.render('public/set',puginform);
     }
     else{//부모가 있다면 그 부모 아이디와 타이틀을 넘긴다.
       puginform.uppersetid = curset[0].ancestor;
       puginform.uppersettitle = curset[0].ancestortitle;
+      console.log('curset puginform', puginform);
       res.render('public/set', puginform);
     }
   });

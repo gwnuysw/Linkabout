@@ -4,20 +4,23 @@ let express = require('express');
 let router = express.Router();
 let set = require('../schemas/set');
 let user = require('../schemas/user');
+let link = require('../schemas/link');
 
 router.get('/:cursetid/:userid', function (req, res, next) {
   let puginform;
 
   Promise.all([
+      link.find({_id:req.params.linkid}),
       set.find({ancestor: req.params.cursetid, personal : req.params.userid}),
       set.find({_id: req.params.cursetid})
   ])
-  .then(([children, curset]) => {
+  .then(([links, children, curset]) => {
     console.log('사용자', curset[0])
     puginform = {
       isAuthed : req.isAuthenticated(),
       children : children,
       curset : curset[0],
+      links: links,
       userid : req.params.userid,
     }
     puginform.userid = req.params.userid;
